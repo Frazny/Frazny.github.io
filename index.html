@@ -72,6 +72,21 @@
       .progress-wrap { flex: 1; height: 4px; background: #2a2a2e; border-radius: 4px; cursor: pointer; position: relative; }
       .progress-bar { height: 100%; background: #1db954; border-radius: 4px; width: 0%; transition: width .1s linear; }
       .audio-time { color: #8b8b95; font: 10px 'DM Mono', monospace; flex-shrink: 0; }
+      /* Giriş ekranı */
+      .entry-screen {
+        position: fixed; inset: 0; z-index: 10000;
+        background: #050505;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+        cursor: pointer;
+        transition: opacity .6s ease;
+      }
+      .entry-screen.hide { opacity: 0; pointer-events: none; }
+      .entry-avatar { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 0 32px rgba(118,85,255,.25); }
+      .entry-name { font-size: 28px; font-weight: 700; letter-spacing: -.05em; text-shadow: 0 0 18px rgba(255,255,255,.4); }
+      .entry-hint { color: #5d5d65; font: 11px 'DM Mono', monospace; letter-spacing: .08em; animation: pulse 2s ease-in-out infinite; }
+      .entry-music { display: flex; align-items: center; gap: 8px; color: #8b8b95; font: 10px 'DM Mono', monospace; margin-top: 4px; }
+      .entry-music::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #1db954; box-shadow: 0 0 8px #1db954; display: inline-block; }
+      @keyframes pulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
       @keyframes arrive { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
       @keyframes sweep { 0%,70% { transform:translateX(-115%); } 100% { transform:translateX(115%); } }
       @keyframes fade { to { opacity:1; } } @keyframes breathe { 50% { transform:translate(-50%,-50%) scale(1.12); opacity:.18; } } @keyframes drift { to { transform:translateY(-12px); } } .hint { opacity:0; }
@@ -81,6 +96,14 @@
   <body>
     <div class="glow"></div><div class="stars"></div><div class="noise"></div>
     <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Giriş ekranı -->
+    <div class="entry-screen" id="entry-screen" role="button" aria-label="Siteye gir">
+      <img class="entry-avatar" src="profile.jpg" alt="Frazny" />
+      <span class="entry-name">Frazny</span>
+      <span class="entry-music">Mist — EsDeeKid ft. Rico Ace</span>
+      <span class="entry-hint">girmek için tıkla</span>
+    </div>
     <main>
       <section class="profile" aria-label="Profil kartı">
         <div class="identity">
@@ -190,6 +213,14 @@
       audio.addEventListener('canplaythrough', () => {
         audio.play().then(() => setPlaying(true)).catch(() => {});
       }, { once: true });
+
+      // Giriş ekranı
+      const entryScreen = document.getElementById('entry-screen');
+      entryScreen.addEventListener('click', () => {
+        entryScreen.classList.add('hide');
+        setTimeout(() => entryScreen.remove(), 650);
+        audio.play().then(() => setPlaying(true)).catch(() => {});
+      });
 
       if (matchMedia('(pointer: fine)').matches) {
         const dot = document.querySelector('.cursor-dot');
