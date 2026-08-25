@@ -50,7 +50,7 @@
       .links a:nth-child(1):hover { border-color:#e24990; background:#351526; }.links a:nth-child(2):hover { border-color:#40d26d; background:#102b19; }.links a:nth-child(3):hover { border-color:#f0f0f0; background:#292929; }.links a:nth-child(4):hover { border-color:#7289da; background:#192142; }.links a:nth-child(5):hover { border-color:#70a8dd; background:#112534; }.links a:nth-child(6):hover { border-color:#e97668; background:#351916; }
       .links img { width: 17px; height: 17px; filter: brightness(0) invert(1); opacity: .85; transition: opacity .2s ease; }
       .links a:hover img { opacity: 1; }
-      .views { position: absolute; left: 20px; bottom: 18px; display: flex; align-items: center; gap: 7px; color: #e8e8eb; font: 600 12px 'DM Mono', monospace; }
+      .views { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 16px; color: #e8e8eb; font: 600 12px 'DM Mono', monospace; }
       .eye { width: 17px; height: 11px; border: 2px solid currentColor; border-radius: 100%; position: relative; } .eye::after { content:""; position:absolute; width:4px; height:4px; border-radius:50%; background:currentColor; top:50%; left:50%; transform:translate(-50%,-50%); }
       .hint { position: fixed; bottom: 27px; color:#5d5d65; font: 11px 'DM Mono',monospace; letter-spacing:.05em; animation: fade 1s 1s both; }
       .extras { margin-top: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; z-index: 1; }
@@ -62,7 +62,7 @@
       @keyframes arrive { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
       @keyframes sweep { 0%,70% { transform:translateX(-115%); } 100% { transform:translateX(115%); } }
       @keyframes fade { to { opacity:1; } } @keyframes breathe { 50% { transform:translate(-50%,-50%) scale(1.12); opacity:.18; } } @keyframes drift { to { transform:translateY(-12px); } } .hint { opacity:0; }
-      @media (max-width: 480px) { .profile{ padding:30px 22px 58px; } .views { left:50%; transform:translateX(-50%); bottom:20px; } .extras { grid-template-columns:1fr; } .links { gap:7px; }.links a { width:36px;height:36px; } }
+      @media (max-width: 480px) { .profile{ padding:30px 22px; } .extras { grid-template-columns:1fr; } .links { gap:7px; }.links a { width:36px;height:36px; } }
     </style>
   </head>
   <body>
