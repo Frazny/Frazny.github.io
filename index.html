@@ -42,7 +42,8 @@
       .profile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.025), transparent 58%); transform: translateX(-100%); animation: sweep 5s ease-in-out infinite; }
       .identity { display: grid; justify-items: center; gap: 8px; text-align: center; }
       .avatar { width: 72px; height: 72px; border-radius: 14px; object-fit: cover; object-position: center; background: #050505; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 0 24px rgba(128,111,255,.12); image-rendering: auto; }
-      h1 { margin: 4px 0 0; font-size: clamp(30px,5vw,43px); letter-spacing: -.07em; text-shadow: 0 0 18px rgba(255,255,255,.52), 0 0 42px rgba(119,93,255,.24); }
+      h1 { margin: 4px 0 0; font-size: clamp(30px,5vw,43px); letter-spacing: -.07em; text-shadow: 0 0 18px rgba(255,255,255,.52), 0 0 42px rgba(119,93,255,.24); animation: glow-pulse 3s ease-in-out infinite; }
+      @keyframes glow-pulse { 0%,100% { text-shadow: 0 0 18px rgba(255,255,255,.52), 0 0 42px rgba(119,93,255,.24); } 50% { text-shadow: 0 0 28px rgba(255,255,255,.9), 0 0 60px rgba(119,93,255,.6), 0 0 90px rgba(119,93,255,.3); } }
       .bio { color: #a6a6ad; font-size: 13px; margin: 0; }
       .links { display: flex; justify-content: center; gap: 9px; margin-top: 20px; position: relative; z-index: 1; }
       .links a { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; color: #d4d4d8; text-decoration: none; border: 1px solid #29292d; background:#151517; transition: .2s ease; }
@@ -108,7 +109,7 @@
       <section class="profile" aria-label="Profil kartı">
         <div class="identity">
           <img class="avatar" src="profile.jpg" alt="Frazny profil fotoğrafı" />
-          <h1>Frazny</h1>
+          <h1 id="typewriter"></h1>
           <p class="bio">Digital Creator · Gaziantep</p>
         </div>
         <nav class="links" aria-label="Sosyal bağlantılar">
@@ -168,6 +169,19 @@
         copyButton.textContent = 'Kopyalandı ✓';
         setTimeout(() => copyButton.textContent = 'Frazny kullanıcı adını kopyala', 1700);
       });
+
+      // Typewriter
+      const typeEl = document.getElementById('typewriter');
+      const typeText = 'Frazny';
+      let typeIndex = 0;
+      function typeWriter() {
+        if (typeIndex <= typeText.length) {
+          typeEl.textContent = typeText.slice(0, typeIndex);
+          typeIndex++;
+          setTimeout(typeWriter, 120);
+        }
+      }
+      setTimeout(typeWriter, 400);
 
       // Audio player
       const audio = document.getElementById('audio');
