@@ -170,6 +170,40 @@
         setTimeout(() => copyButton.textContent = 'Frazny kullanıcı adını kopyala', 1700);
       });
 
+      // Title typewriter + pulse
+      const titleText = 'Frazny';
+      let titleIndex = 0;
+      let titleDir = 1;
+      function titleType() {
+        document.title = titleText.slice(0, titleIndex) + (titleDir === 1 ? '|' : '');
+        if (titleDir === 1) {
+          titleIndex++;
+          if (titleIndex > titleText.length) {
+            titleDir = 0;
+            setTimeout(titlePulse, 800);
+            return;
+          }
+        }
+        setTimeout(titleType, 130);
+      }
+      function titlePulse() {
+        const frames = ['Frazny ✦', 'Frazny ✧', 'Frazny ✦', 'Frazny'];
+        let i = 0;
+        function next() {
+          document.title = frames[i];
+          i++;
+          if (i < frames.length) setTimeout(next, 400);
+          else setTimeout(titleType2, 2000);
+        }
+        next();
+      }
+      function titleType2() {
+        titleIndex = 0;
+        titleDir = 1;
+        titleType();
+      }
+      titleType();
+
       // Typewriter
       const typeEl = document.getElementById('typewriter');
       const typeText = 'Frazny';
