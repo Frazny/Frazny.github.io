@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050505" />
+    <title>Frazny — links</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #050505;
+        color: #f6f6f6;
+        font-family: Inter, Arial, sans-serif;
+      }
+      @media (pointer: fine) {
+        body, a { cursor: none; }
+        .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+        .cursor-dot { width: 5px; height: 5px; background: #fff; }
+        .cursor-ring { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.92); transition: width .18s ease, height .18s ease, border-color .18s ease; }
+        body.cursor-link .cursor-ring { width: 42px; height: 42px; border-color: #b4a8ff; }
+      }
+      .noise {
+        position: fixed; inset: 0; pointer-events: none; opacity: .045;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+      }
+      .glow { position: fixed; width: 60vw; height: 40vw; border-radius: 50%; filter: blur(110px); opacity: .12; background: #7655ff; top: 45%; left: 50%; transform: translate(-50%, -50%); animation: breathe 7s ease-in-out infinite; }
+      .stars { position: fixed; inset: 0; pointer-events: none; opacity: .55; background-image: radial-gradient(circle at 12% 23%,#bdb9ff 0 1px,transparent 1.5px),radial-gradient(circle at 78% 18%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 67% 76%,#8f86ff 0 1px,transparent 1.5px),radial-gradient(circle at 25% 82%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 88% 59%,#c7c3ff 0 1px,transparent 1.5px); animation: drift 15s ease-in-out infinite alternate; }
+      main { min-height: 100vh; display: grid; place-items: center; padding: 24px; position: relative; }
+      .profile {
+        width: min(640px, 100%); border-radius: 22px;
+        padding: 34px 38px 28px; position: relative; overflow: hidden;
+        background: rgba(18,18,19,.88); border: 1px solid rgba(255,255,255,.045);
+        box-shadow: 0 22px 70px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.025);
+        animation: arrive .8s cubic-bezier(.2,.8,.2,1) both;
+      }
+      .profile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.025), transparent 58%); transform: translateX(-100%); animation: sweep 5s ease-in-out infinite; }
+      .identity { display: grid; justify-items: center; gap: 8px; text-align: center; }
+      .avatar { width: 72px; height: 72px; border-radius: 14px; object-fit: cover; object-position: center; background: #050505; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 0 24px rgba(128,111,255,.12); image-rendering: auto; }
+      h1 { margin: 4px 0 0; font-size: clamp(30px,5vw,43px); letter-spacing: -.07em; text-shadow: 0 0 18px rgba(255,255,255,.52), 0 0 42px rgba(119,93,255,.24); }
+      .bio { color: #a6a6ad; font-size: 13px; margin: 0; }
+      .links { display: flex; justify-content: center; gap: 9px; margin-top: 20px; position: relative; z-index: 1; }
+      .links a { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; color: #d4d4d8; text-decoration: none; border: 1px solid #29292d; background:#151517; transition: .2s ease; }
+      .links a:hover { color:white; border-color:#6b62e8; background:#24213d; transform: translateY(-2px); }
+      .links a:nth-child(1):hover { border-color:#e24990; background:#351526; }.links a:nth-child(2):hover { border-color:#40d26d; background:#102b19; }.links a:nth-child(3):hover { border-color:#f0f0f0; background:#292929; }.links a:nth-child(4):hover { border-color:#7289da; background:#192142; }.links a:nth-child(5):hover { border-color:#70a8dd; background:#112534; }.links a:nth-child(6):hover { border-color:#e97668; background:#351916; }
+      .links img { width: 17px; height: 17px; filter: brightness(0) invert(1); opacity: .85; transition: opacity .2s ease; }
+      .links a:hover img { opacity: 1; }
+      .views { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 16px; color: #e8e8eb; font: 600 12px 'DM Mono', monospace; }
+      .eye { width: 17px; height: 11px; border: 2px solid currentColor; border-radius: 100%; position: relative; } .eye::after { content:""; position:absolute; width:4px; height:4px; border-radius:50%; background:currentColor; top:50%; left:50%; transform:translate(-50%,-50%); }
+      .hint { position: fixed; bottom: 27px; color:#5d5d65; font: 11px 'DM Mono',monospace; letter-spacing:.05em; animation: fade 1s 1s both; }
+      .extras { margin-top: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; z-index: 1; }
+      .mini-card { min-height: 64px; border: 1px solid #29292d; border-radius: 12px; padding: 12px 13px; background: rgba(12,12,13,.64); color: #cacad0; text-decoration: none; transition: .2s ease; }
+      .mini-card:hover { border-color:#6259cd; transform: translateY(-2px); background:#181721; }
+      .mini-title { display:flex; align-items:center; gap:7px; color:#f0f0f4; font-size:12px; font-weight:600; }.mini-copy { margin-top:5px; color:#8b8b95; font: 10px 'DM Mono',monospace; }
+      .status-dot { width:7px; height:7px; border-radius:50%; background:#4cd36e; box-shadow:0 0 10px #4cd36e; }.status-dot.idle { background:#b7a653; box-shadow:0 0 10px #b7a653; }
+      .copy-btn { appearance:none; width:100%; border:1px solid #29292d; border-radius:11px; padding:10px; margin-top:10px; color:#aaaab3; background:#151517; font:11px 'DM Mono',monospace; transition:.2s ease; }.copy-btn:hover { color:white; border-color:#5e56c7; background:#211e3a; }
+      .now-playing { margin-top: 18px; position: relative; z-index: 1; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); }
+      .now-playing-label { display: flex; align-items: center; gap: 6px; padding: 8px 12px 6px; background: rgba(12,12,13,.8); color: #8b8b95; font: 10px 'DM Mono', monospace; letter-spacing: .05em; }
+      .now-playing-label::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #1db954; box-shadow: 0 0 8px #1db954; }
+      .now-playing iframe { display: block; border-radius: 0 0 13px 13px; }
+      @keyframes arrive { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+      @keyframes sweep { 0%,70% { transform:translateX(-115%); } 100% { transform:translateX(115%); } }
+      @keyframes fade { to { opacity:1; } } @keyframes breathe { 50% { transform:translate(-50%,-50%) scale(1.12); opacity:.18; } } @keyframes drift { to { transform:translateY(-12px); } } .hint { opacity:0; }
+      @media (max-width: 480px) { .profile{ padding:30px 22px; } .extras { grid-template-columns:1fr; } .links { gap:7px; }.links a { width:36px;height:36px; } }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div><div class="stars"></div><div class="noise"></div>
+    <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+    <main>
+      <section class="profile" aria-label="Profil kartı">
+        <div class="identity">
+          <img class="avatar" src="profile.jpg" alt="Frazny profil fotoğrafı" />
+          <h1>Frazny</h1>
+          <p class="bio">Digital Creator · Gaziantep</p>
+        </div>
+        <nav class="links" aria-label="Sosyal bağlantılar">
+          <a href="https://www.instagram.com/bilal_qnk/" target="_blank" rel="noreferrer" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram" alt="" /></a>
+          <a href="https://open.spotify.com/user/8x5yr03fshgcl5rtsm2z0fwpk" target="_blank" rel="noreferrer" aria-label="Spotify"><img src="https://cdn.simpleicons.org/spotify" alt="" /></a>
+          <a href="https://github.com/Frazny" target="_blank" rel="noreferrer" aria-label="GitHub"><img src="https://cdn.simpleicons.org/github" alt="" /></a>
+          <a href="https://discord.com/channels/@frazny" target="_blank" rel="noreferrer" aria-label="Discord"><img src="https://cdn.simpleicons.org/discord" alt="" /></a>
+          <a href="https://steamcommunity.com/id/Frazny/" target="_blank" rel="noreferrer" aria-label="Steam"><img src="https://cdn.simpleicons.org/steam" alt="" /></a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Bilalanikv2%40gmail.com" target="_blank" rel="noreferrer" aria-label="Gmail ile e-posta gönder"><img src="https://cdn.simpleicons.org/gmail" alt="" /></a>
+        </nav>
+        <button class="copy-btn" id="copy-name" type="button">Frazny kullanıcı adını kopyala</button>
+
+        <div class="now-playing" aria-label="Şu an dinleniyor">
+          <div class="now-playing-label">şu an dinleniyor</div>
+          <iframe
+            src="https://open.spotify.com/embed/track/2NLOyWzztMiW5FmNhD83K6?utm_source=generator&theme=0"
+            width="100%"
+            height="80"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="EsDeeKid - Mist ft. Rico Ace"
+          ></iframe>
+        </div>
+
+        <section class="extras" aria-label="Profil bilgileri">
+          <a class="mini-card" href="https://discord.com/channels/@frazny" target="_blank" rel="noreferrer">
+            <span class="mini-title"><span class="status-dot idle"></span> Discord</span>
+            <span class="mini-copy">Bağlantıyı aç</span>
+          </a>
+          <a class="mini-card" href="https://github.com/Frazny" target="_blank" rel="noreferrer">
+            <span class="mini-title">⌘ GitHub projeleri</span>
+            <span class="mini-copy">@Frazny profilini görüntüle</span>
+          </a>
+        </section>
+        <div class="views"><span class="eye" aria-hidden="true"></span><span id="views">001</span></div>
+      </section>
+      <div class="hint">frazny.dev</div>
+    </main>
+    <script>
+      const key = 'profile-views';
+      const count = Number(localStorage.getItem(key) || 0) + 1;
+      localStorage.setItem(key, count);
+      document.querySelector('#views').textContent = String(count).padStart(3, '0');
+
+      const copyButton = document.querySelector('#copy-name');
+      copyButton.addEventListener('click', async () => {
+        await navigator.clipboard.writeText('Frazny');
+        copyButton.textContent = 'Kopyalandı ✓';
+        setTimeout(() => copyButton.textContent = 'Frazny kullanıcı adını kopyala', 1700);
+      });
+
+      if (matchMedia('(pointer: fine)').matches) {
+        const dot = document.querySelector('.cursor-dot');
+        const ring = document.querySelector('.cursor-ring');
+        let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
+        let ringX = mouseX, ringY = mouseY;
+        addEventListener('mousemove', ({ clientX, clientY }) => {
+          mouseX = clientX; mouseY = clientY;
+          dot.style.left = `${mouseX}px`; dot.style.top = `${mouseY}px`;
+        });
+        document.querySelectorAll('a').forEach(link => {
+          link.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
+          link.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
+        });
+        const animateCursor = () => {
+          ringX += (mouseX - ringX) * .16;
+          ringY += (mouseY - ringY) * .16;
+          ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`;
+          requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+      }
+    </script>
+  </body>
+</html>
