@@ -59,10 +59,19 @@
       .mini-title { display:flex; align-items:center; gap:7px; color:#f0f0f4; font-size:12px; font-weight:600; }.mini-copy { margin-top:5px; color:#8b8b95; font: 10px 'DM Mono',monospace; }
       .status-dot { width:7px; height:7px; border-radius:50%; background:#4cd36e; box-shadow:0 0 10px #4cd36e; }.status-dot.idle { background:#b7a653; box-shadow:0 0 10px #b7a653; }
       .copy-btn { appearance:none; width:100%; border:1px solid #29292d; border-radius:11px; padding:10px; margin-top:10px; color:#aaaab3; background:#151517; font:11px 'DM Mono',monospace; transition:.2s ease; }.copy-btn:hover { color:white; border-color:#5e56c7; background:#211e3a; }
-      .now-playing { margin-top: 18px; position: relative; z-index: 1; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); }
-      .now-playing-label { display: flex; align-items: center; gap: 6px; padding: 8px 12px 6px; background: rgba(12,12,13,.8); color: #8b8b95; font: 10px 'DM Mono', monospace; letter-spacing: .05em; }
+      .now-playing { margin-top: 18px; position: relative; z-index: 1; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); background: rgba(12,12,13,.8); }
+      .now-playing-label { display: flex; align-items: center; gap: 6px; padding: 8px 12px 6px; color: #8b8b95; font: 10px 'DM Mono', monospace; letter-spacing: .05em; }
       .now-playing-label::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #1db954; box-shadow: 0 0 8px #1db954; }
-      .now-playing iframe { display: block; border-radius: 0 0 13px 13px; }
+      .audio-player { padding: 10px 13px 13px; }
+      .audio-info { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
+      .audio-title { color: #f0f0f4; font-size: 13px; font-weight: 600; }
+      .audio-artist { color: #8b8b95; font: 10px 'DM Mono', monospace; }
+      .audio-controls { display: flex; align-items: center; gap: 10px; }
+      .play-btn { width: 32px; height: 32px; border-radius: 50%; background: #1db954; border: none; color: #000; display: grid; place-items: center; cursor: pointer; flex-shrink: 0; transition: .2s ease; }
+      .play-btn:hover { background: #1ed760; transform: scale(1.06); }
+      .progress-wrap { flex: 1; height: 4px; background: #2a2a2e; border-radius: 4px; cursor: pointer; position: relative; }
+      .progress-bar { height: 100%; background: #1db954; border-radius: 4px; width: 0%; transition: width .1s linear; }
+      .audio-time { color: #8b8b95; font: 10px 'DM Mono', monospace; flex-shrink: 0; }
       @keyframes arrive { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
       @keyframes sweep { 0%,70% { transform:translateX(-115%); } 100% { transform:translateX(115%); } }
       @keyframes fade { to { opacity:1; } } @keyframes breathe { 50% { transform:translate(-50%,-50%) scale(1.12); opacity:.18; } } @keyframes drift { to { transform:translateY(-12px); } } .hint { opacity:0; }
@@ -91,15 +100,23 @@
 
         <div class="now-playing" aria-label="Şu an dinleniyor">
           <div class="now-playing-label">şu an dinleniyor</div>
-          <iframe
-            src="https://open.spotify.com/embed/track/2NLOyWzztMiW5FmNhD83K6?utm_source=generator&theme=0&autoplay=1"
-            width="100%"
-            height="80"
-            frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="eager"
-            title="EsDeeKid - Mist ft. Rico Ace"
-          ></iframe>
+          <div class="audio-player">
+            <div class="audio-info">
+              <span class="audio-title">Mist</span>
+              <span class="audio-artist">EsDeeKid ft. Rico Ace</span>
+            </div>
+            <div class="audio-controls">
+              <button class="play-btn" id="play-btn" aria-label="Oynat/Durdur">
+                <svg id="icon-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2.5l10 5.5-10 5.5z"/></svg>
+                <svg id="icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+              </button>
+              <div class="progress-wrap" id="progress-wrap">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+              <span class="audio-time" id="audio-time">0:00</span>
+            </div>
+            <audio id="audio" src="mist.mp3" preload="auto"></audio>
+          </div>
         </div>
 
         <section class="extras" aria-label="Profil bilgileri">
@@ -128,6 +145,51 @@
         copyButton.textContent = 'Kopyalandı ✓';
         setTimeout(() => copyButton.textContent = 'Frazny kullanıcı adını kopyala', 1700);
       });
+
+      // Audio player
+      const audio = document.getElementById('audio');
+      const playBtn = document.getElementById('play-btn');
+      const iconPlay = document.getElementById('icon-play');
+      const iconPause = document.getElementById('icon-pause');
+      const progressBar = document.getElementById('progress-bar');
+      const progressWrap = document.getElementById('progress-wrap');
+      const audioTime = document.getElementById('audio-time');
+
+      function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m}:${sec.toString().padStart(2, '0')}`;
+      }
+
+      function setPlaying(playing) {
+        iconPlay.style.display = playing ? 'none' : 'block';
+        iconPause.style.display = playing ? 'block' : 'none';
+      }
+
+      audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+          progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+          audioTime.textContent = formatTime(audio.currentTime);
+        }
+      });
+
+      audio.addEventListener('ended', () => setPlaying(false));
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) { audio.play(); setPlaying(true); }
+        else { audio.pause(); setPlaying(false); }
+      });
+
+      progressWrap.addEventListener('click', (e) => {
+        const rect = progressWrap.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = ratio * audio.duration;
+      });
+
+      // Autoplay on load
+      audio.addEventListener('canplaythrough', () => {
+        audio.play().then(() => setPlaying(true)).catch(() => {});
+      }, { once: true });
 
       if (matchMedia('(pointer: fine)').matches) {
         const dot = document.querySelector('.cursor-dot');
