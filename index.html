@@ -159,10 +159,15 @@
       <div class="hint">frazny.dev</div>
     </main>
     <script>
-      const key = 'profile-views';
-      const count = Number(localStorage.getItem(key) || 0) + 1;
-      localStorage.setItem(key, count);
-      document.querySelector('#views').textContent = String(count).padStart(3, '0');
+      // Gerçek ziyaretçi sayacı - Cloudflare Worker
+      fetch('https://frazny-counter.yusufakbulit.workers.dev/')
+        .then(r => r.json())
+        .then(data => {
+          document.querySelector('#views').textContent = String(data.count).padStart(3, '0');
+        })
+        .catch(() => {
+          document.querySelector('#views').textContent = '001';
+        });
 
       const copyButton = document.querySelector('#copy-name');
       copyButton.addEventListener('click', async () => {
