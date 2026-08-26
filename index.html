@@ -20,7 +20,7 @@
         font-family: Inter, Arial, sans-serif;
       }
       @media (pointer: fine) {
-        body, a { cursor: none; }
+        body.site-entered, body.site-entered a { cursor: none; }
         .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); mix-blend-mode: difference; }
         .cursor-dot { width: 5px; height: 5px; background: #fff; }
         .cursor-ring { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.92); transition: width .18s ease, height .18s ease, border-color .18s ease; }
@@ -79,7 +79,7 @@
         position: fixed; inset: 0; z-index: 10000;
         background: #050505;
         display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-        cursor: pointer;
+        cursor: pointer !important;
         transition: opacity .6s ease;
       }
       .entry-screen.hide { opacity: 0; pointer-events: none; }
@@ -279,6 +279,7 @@
       function enterSite() {
         if (!entryScreen.parentNode) return;
         entryScreen.classList.add('hide');
+        document.body.classList.add('site-entered');
         setTimeout(() => entryScreen.remove(), 650);
         audio.play().then(() => setPlaying(true)).catch(() => {});
       }
