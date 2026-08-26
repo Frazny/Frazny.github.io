@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050505" />
     <link rel="icon" type="image/jpeg" href="favicon.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Frazny — links</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter:wght@400;500;600;700&display=swap');
@@ -79,8 +81,9 @@
         position: fixed; inset: 0; z-index: 10000;
         background: #050505;
         display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-        cursor: pointer !important;
+        cursor: pointer;
         transition: opacity .6s ease;
+        -webkit-tap-highlight-color: transparent;
       }
       .entry-screen.hide { opacity: 0; pointer-events: none; }
       .entry-avatar { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 0 32px rgba(118,85,255,.25); }
@@ -108,6 +111,7 @@
       <span class="entry-hint">girmek için tıkla</span>
       <span class="entry-browser-note">müzik için tarayıcıda aç</span>
     </div>
+
     <main>
       <section class="profile" aria-label="Profil kartı">
         <div class="identity">
@@ -160,68 +164,48 @@
       </section>
       <div class="hint">frazny.dev</div>
     </main>
+
     <script>
-      // Gerçek ziyaretçi sayacı - Cloudflare Worker
+      // Ziyaretçi sayacı
       fetch('https://frazny-counter.yusufakbulit.workers.dev/')
         .then(r => r.json())
-        .then(data => {
-          document.querySelector('#views').textContent = String(data.count).padStart(3, '0');
-        })
-        .catch(() => {
-          document.querySelector('#views').textContent = '001';
-        });
+        .then(data => { document.querySelector('#views').textContent = String(data.count).padStart(3, '0'); })
+        .catch(() => { document.querySelector('#views').textContent = '001'; });
 
-      const copyButton = document.querySelector('#copy-name');
-      copyButton.addEventListener('click', async () => {
+      // Kopyala butonu
+      document.querySelector('#copy-name').addEventListener('click', async () => {
         await navigator.clipboard.writeText('Frazny');
-        copyButton.textContent = 'Kopyalandı ✓';
-        setTimeout(() => copyButton.textContent = 'Frazny kullanıcı adını kopyala', 1700);
+        const btn = document.querySelector('#copy-name');
+        btn.textContent = 'Kopyalandı ✓';
+        setTimeout(() => btn.textContent = 'Frazny kullanıcı adını kopyala', 1700);
       });
 
-      // Title typewriter + pulse
+      // Sekme başlığı typewriter + pulse
       const titleText = 'Frazny';
-      let titleIndex = 0;
-      let titleDir = 1;
+      let tIdx = 0;
       function titleType() {
-        document.title = titleText.slice(0, titleIndex) + (titleDir === 1 ? '|' : '');
-        if (titleDir === 1) {
-          titleIndex++;
-          if (titleIndex > titleText.length) {
-            titleDir = 0;
-            setTimeout(titlePulse, 800);
-            return;
-          }
-        }
-        setTimeout(titleType, 130);
+        document.title = titleText.slice(0, tIdx) + '|';
+        tIdx++;
+        if (tIdx <= titleText.length) { setTimeout(titleType, 130); }
+        else { setTimeout(titlePulse, 800); }
       }
       function titlePulse() {
         const frames = ['Frazny ✦', 'Frazny ✧', 'Frazny ✦', 'Frazny'];
         let i = 0;
-        function next() {
-          document.title = frames[i];
-          i++;
+        (function next() {
+          document.title = frames[i++];
           if (i < frames.length) setTimeout(next, 400);
-          else setTimeout(titleType2, 2000);
-        }
-        next();
-      }
-      function titleType2() {
-        titleIndex = 0;
-        titleDir = 1;
-        titleType();
+          else setTimeout(() => { tIdx = 0; titleType(); }, 2000);
+        })();
       }
       titleType();
 
-      // Typewriter
+      // Sayfa içi typewriter
       const typeEl = document.getElementById('typewriter');
-      const typeText = 'Frazny';
-      let typeIndex = 0;
+      let pIdx = 0;
       function typeWriter() {
-        if (typeIndex <= typeText.length) {
-          typeEl.textContent = typeText.slice(0, typeIndex);
-          typeIndex++;
-          setTimeout(typeWriter, 120);
-        }
+        typeEl.textContent = 'Frazny'.slice(0, pIdx);
+        if (pIdx <= 6) { pIdx++; setTimeout(typeWriter, 120); }
       }
       setTimeout(typeWriter, 400);
 
@@ -234,76 +218,61 @@
       const progressWrap = document.getElementById('progress-wrap');
       const audioTime = document.getElementById('audio-time');
 
-      function formatTime(s) {
-        const m = Math.floor(s / 60);
-        const sec = Math.floor(s % 60);
-        return `${m}:${sec.toString().padStart(2, '0')}`;
-      }
-
-      function setPlaying(playing) {
-        iconPlay.style.display = playing ? 'none' : 'block';
-        iconPause.style.display = playing ? 'block' : 'none';
-      }
+      function fmt(s) { return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'); }
+      function setPlaying(p) { iconPlay.style.display = p ? 'none' : 'block'; iconPause.style.display = p ? 'block' : 'none'; }
 
       audio.addEventListener('timeupdate', () => {
         if (audio.duration) {
           progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
-          audioTime.textContent = formatTime(audio.currentTime);
+          audioTime.textContent = fmt(audio.currentTime);
         }
       });
-
       audio.addEventListener('ended', () => setPlaying(false));
-
       playBtn.addEventListener('click', () => {
         if (audio.paused) { audio.play(); setPlaying(true); }
         else { audio.pause(); setPlaying(false); }
       });
-
-      progressWrap.addEventListener('click', (e) => {
-        const rect = progressWrap.getBoundingClientRect();
-        const ratio = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = ratio * audio.duration;
+      progressWrap.addEventListener('click', e => {
+        const r = progressWrap.getBoundingClientRect();
+        audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
       });
-
-      // Autoplay on load
-      audio.addEventListener('canplaythrough', () => {
-        audio.play().then(() => setPlaying(true)).catch(() => {});
-      }, { once: true });
 
       // Giriş ekranı
       const entryScreen = document.getElementById('entry-screen');
-      entryScreen.addEventListener('click', () => {
-      // Giriş ekranı - arka planda şarkıyı önceden yükle
-      const entryScreen = document.getElementById('entry-screen');
       audio.load();
+
+      let entered = false;
       function enterSite() {
-        if (!entryScreen.parentNode) return;
+        if (entered) return;
+        entered = true;
         entryScreen.classList.add('hide');
         document.body.classList.add('site-entered');
-        setTimeout(() => entryScreen.remove(), 650);
+        setTimeout(() => { if (entryScreen.parentNode) entryScreen.remove(); }, 650);
         audio.play().then(() => setPlaying(true)).catch(() => {});
       }
+
       entryScreen.addEventListener('click', enterSite);
-      entryScreen.addEventListener('touchstart', enterSite, { passive: true });
-      entryScreen.addEventListener('pointerup', enterSite);onst dot = document.querySelector('.cursor-dot');
+      entryScreen.addEventListener('touchend', enterSite, { passive: true });
+      document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') enterSite(); });
+
+      // Custom cursor (sadece giriş sonrası)
+      if (matchMedia('(pointer: fine)').matches) {
+        const dot = document.querySelector('.cursor-dot');
         const ring = document.querySelector('.cursor-ring');
-        let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
-        let ringX = mouseX, ringY = mouseY;
-        addEventListener('mousemove', ({ clientX, clientY }) => {
-          mouseX = clientX; mouseY = clientY;
-          dot.style.left = `${mouseX}px`; dot.style.top = `${mouseY}px`;
+        let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+        addEventListener('mousemove', e => {
+          mx = e.clientX; my = e.clientY;
+          dot.style.left = mx+'px'; dot.style.top = my+'px';
         });
-        document.querySelectorAll('a').forEach(link => {
-          link.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
-          link.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
+        document.querySelectorAll('a').forEach(a => {
+          a.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
+          a.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
         });
-        const animateCursor = () => {
-          ringX += (mouseX - ringX) * .16;
-          ringY += (mouseY - ringY) * .16;
-          ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`;
-          requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
+        (function animCursor() {
+          rx += (mx-rx)*.16; ry += (my-ry)*.16;
+          ring.style.left = rx+'px'; ring.style.top = ry+'px';
+          requestAnimationFrame(animCursor);
+        })();
       }
     </script>
   </body>
