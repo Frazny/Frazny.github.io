@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050505" />
     <link rel="icon" type="image/jpeg" href="favicon.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="mist.mp3" as="audio" type="audio/mpeg" />
     <title>Frazny — links</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter:wght@400;500;600;700&display=swap');
@@ -143,7 +140,7 @@
               </div>
               <span class="audio-time" id="audio-time">0:00</span>
             </div>
-            <audio id="audio" src="mist.mp3" preload="metadata"></audio>
+            <audio id="audio" src="mist.mp3" preload="auto"></audio>
           </div>
         </div>
 
@@ -274,13 +271,14 @@
       // Giriş ekranı
       const entryScreen = document.getElementById('entry-screen');
       entryScreen.addEventListener('click', () => {
+      // Giriş ekranı - arka planda şarkıyı önceden yükle
+      const entryScreen = document.getElementById('entry-screen');
+      audio.load();
+      entryScreen.addEventListener('click', () => {
         entryScreen.classList.add('hide');
         setTimeout(() => entryScreen.remove(), 650);
         audio.play().then(() => setPlaying(true)).catch(() => {});
-      });
-
-      if (matchMedia('(pointer: fine)').matches) {
-        const dot = document.querySelector('.cursor-dot');
+      });onst dot = document.querySelector('.cursor-dot');
         const ring = document.querySelector('.cursor-ring');
         let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
         let ringX = mouseX, ringY = mouseY;
