@@ -274,11 +274,15 @@
       // Giriş ekranı - arka planda şarkıyı önceden yükle
       const entryScreen = document.getElementById('entry-screen');
       audio.load();
-      entryScreen.addEventListener('click', () => {
+      function enterSite() {
+        if (!entryScreen.parentNode) return;
         entryScreen.classList.add('hide');
         setTimeout(() => entryScreen.remove(), 650);
         audio.play().then(() => setPlaying(true)).catch(() => {});
-      });onst dot = document.querySelector('.cursor-dot');
+      }
+      entryScreen.addEventListener('click', enterSite);
+      entryScreen.addEventListener('touchstart', enterSite, { passive: true });
+      entryScreen.addEventListener('pointerup', enterSite);onst dot = document.querySelector('.cursor-dot');
         const ring = document.querySelector('.cursor-ring');
         let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
         let ringX = mouseX, ringY = mouseY;
