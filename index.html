@@ -689,6 +689,9 @@
       }
       pollLanyard();
       setInterval(pollLanyard, 5000); // 5 saniyede bir güncelle (güvenilir)
+      // Sekmeye geri dönünce anında tazele (arka plan kısıtlamasını aş)
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) pollLanyard(); });
+      window.addEventListener('focus', pollLanyard);
 
       // Gerçek zamanlı: Lanyard WebSocket (anlık, bekleme yok)
       function connectLanyardWS() {
