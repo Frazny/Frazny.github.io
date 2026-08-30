@@ -210,13 +210,6 @@
       .progress-bar { height: 100%; background: linear-gradient(90deg,#1db954,#3ce07e); border-radius: 5px; width: 0%; transition: width .1s linear; }
       .audio-time { color: var(--muted); font: 11px 'DM Mono', monospace; flex-shrink: 0; min-width: 34px; text-align: right; }
 
-      .extras { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; z-index: 1; }
-      .mini-card { min-height: 66px; border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; background: rgba(255,255,255,.02); color: #d0d0d8; text-decoration: none; transition: .22s ease; }
-      .mini-card:hover { border-color: var(--accent); transform: translateY(-3px); background: rgba(124,108,255,.08); box-shadow: 0 10px 26px rgba(124,108,255,.18); }
-      .mini-title { display: flex; align-items: center; gap: 8px; color: var(--text); font-size: 13px; font-weight: 600; }
-      .mini-copy { margin-top: 6px; color: var(--muted); font: 11px 'DM Mono', monospace; }
-      .status-dot.idle { background:#b7a653; box-shadow:0 0 10px #b7a653; }
-
       .views { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; color: #e8e8eb; font: 600 12px 'DM Mono', monospace; }
       .eye { width: 18px; height: 12px; border: 2px solid currentColor; border-radius: 100%; position: relative; opacity:.7; } .eye::after { content:""; position:absolute; width:4px; height:4px; border-radius:50%; background:currentColor; top:50%; left:50%; transform:translate(-50%,-50%); }
 
@@ -242,7 +235,7 @@
 
       @media (max-width: 480px) {
         .profile { padding: 30px 22px; }
-        .extras, .projects { grid-template-columns: 1fr; }
+        .projects { grid-template-columns: 1fr; }
         .stats-grid { grid-template-columns: 1fr 1fr; }
         .links { gap: 8px; }
         .links a { width: 38px; height: 38px; }
@@ -429,17 +422,6 @@
           </div>
         </div>
 
-        <section class="extras" aria-label="Profil bilgileri">
-          <a class="mini-card" href="https://discord.com/channels/@frazny" target="_blank" rel="noreferrer">
-            <span class="mini-title"><span class="status-dot idle" id="discord-card-dot"></span> Discord</span>
-            <span class="mini-copy" id="discord-card-copy" data-i18n="open">Bağlantıyı aç</span>
-          </a>
-          <a class="mini-card" href="https://github.com/Frazny" target="_blank" rel="noreferrer">
-            <span class="mini-title">⌘ <span data-i18n="githubProjects">GitHub projeleri</span></span>
-            <span class="mini-copy" data-i18n="viewProfile">@Frazny profilini görüntüle</span>
-          </a>
-        </section>
-
         <div class="views"><span class="eye" aria-hidden="true"></span><span id="views">001</span></div>
       </section>
 
@@ -601,8 +583,6 @@
         const status = data.discord_status || 'offline';
         const dotWrap = document.getElementById('discord-dot-wrap');
         const statusEl = document.getElementById('discord-status');
-        const cardDot = document.getElementById('discord-card-dot');
-        const cardCopy = document.getElementById('discord-card-copy');
 
         if (status !== 'offline') {
           lastSeen = Date.now();
@@ -618,16 +598,11 @@
         const [label, color] = map[status] || map.offline;
         dotWrap.style.setProperty('--dot-color', color);
         dotWrap.classList.toggle('online', status !== 'offline');
-        cardDot.style.background = color;
-        cardDot.style.boxShadow = '0 0 10px ' + color;
-        cardDot.classList.remove('idle');
 
         if (status === 'offline') {
           statusEl.textContent = lastSeen ? t('lastSeen') + ': ' + fmtAgo(lastSeen) : t('offline');
-          cardCopy.textContent = lastSeen ? t('lastSeen') + ': ' + fmtAgo(lastSeen) : t('open');
         } else {
           statusEl.textContent = label;
-          cardCopy.textContent = t('open');
         }
 
         const spot = data.activities && data.activities.find(a => a.type === 2 && a.name === 'Spotify');
