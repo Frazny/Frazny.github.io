@@ -4,10 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07070c" />
-    <meta name="description" content="Frazny — Digital Creator · Gaziantep. Kişisel bağlantılar ve profil." />
+    <meta name="description" content="Frazny — Digital Creator · Gaziantep. Kişisel bağlantılar, canlı durum ve profil." />
     <link rel="icon" type="image/jpeg" href="favicon.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Sosyal medya önizleme (OG) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Frazny" />
+    <meta property="og:title" content="Frazny — Digital Creator" />
+    <meta property="og:description" content="Gaziantep'ten dijital içerik üreticisi. Canlı durum, Spotify ve bağlantılar." />
+    <meta property="og:url" content="https://frazny.is-a.dev/" />
+    <meta property="og:image" content="https://frazny.is-a.dev/profile.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Frazny — Digital Creator" />
+    <meta name="twitter:description" content="Gaziantep'ten dijital içerik üreticisi." />
+    <meta name="twitter:image" content="https://frazny.is-a.dev/profile.jpg" />
+
     <title>Frazny — links</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -16,7 +29,6 @@
         color-scheme: dark;
         --bg: #07070c;
         --card: rgba(20, 20, 28, .72);
-        --card-solid: #13131b;
         --border: rgba(255, 255, 255, .08);
         --border-strong: rgba(255, 255, 255, .14);
         --accent: #7c6cff;
@@ -29,38 +41,23 @@
       * { box-sizing: border-box; }
       html { scrollbar-color: #2a2a35 transparent; }
       body {
-        margin: 0;
-        min-height: 100vh;
-        background: var(--bg);
-        color: var(--text);
-        font-family: Inter, Arial, sans-serif;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
+        margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+        font-family: Inter, Arial, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased;
       }
 
-      /* ---- Arka plan: aurora + yıldızlar + gürültü ---- */
+      /* ---- Arka plan ---- */
       .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; background: var(--bg); }
       .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; will-change: transform; }
       .blob.b1 { width: 68vmax; height: 68vmax; background: radial-gradient(circle at 30% 30%, #7c6cff, transparent 62%); top: -22vmax; left: -12vmax; animation: floatA 20s ease-in-out infinite alternate; }
       .blob.b2 { width: 62vmax; height: 62vmax; background: radial-gradient(circle at 60% 40%, #22d3ee, transparent 62%); bottom: -26vmax; right: -16vmax; animation: floatA 24s ease-in-out infinite alternate-reverse; }
       .blob.b3 { width: 46vmax; height: 46vmax; background: radial-gradient(circle at 50% 50%, #ff6ad5, transparent 64%); top: 30%; left: 55%; opacity: .3; animation: floatA 28s ease-in-out infinite alternate; }
       @keyframes floatA { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6vmax,-5vmax,0) scale(1.15); } }
-      .stars {
-        position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .6;
-        background-image:
-          radial-gradient(circle at 12% 23%, #bdb9ff 0 1px, transparent 1.6px),
-          radial-gradient(circle at 78% 18%, #fff 0 1px, transparent 1.6px),
-          radial-gradient(circle at 67% 76%, #8f86ff 0 1px, transparent 1.6px),
-          radial-gradient(circle at 25% 82%, #fff 0 1px, transparent 1.6px),
-          radial-gradient(circle at 88% 59%, #c7c3ff 0 1px, transparent 1.6px),
-          radial-gradient(circle at 45% 40%, #fff 0 1px, transparent 1.6px);
-        animation: drift 16s ease-in-out infinite alternate;
-      }
+      .stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .6;
+        background-image: radial-gradient(circle at 12% 23%, #bdb9ff 0 1px, transparent 1.6px),radial-gradient(circle at 78% 18%, #fff 0 1px, transparent 1.6px),radial-gradient(circle at 67% 76%, #8f86ff 0 1px, transparent 1.6px),radial-gradient(circle at 25% 82%, #fff 0 1px, transparent 1.6px),radial-gradient(circle at 88% 59%, #c7c3ff 0 1px, transparent 1.6px),radial-gradient(circle at 45% 40%, #fff 0 1px, transparent 1.6px);
+        animation: drift 16s ease-in-out infinite alternate; }
       @keyframes drift { to { transform: translateY(-14px); } }
-      .noise {
-        position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .04;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
-      }
+      .noise { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .04;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
 
       /* ---- Özel imleç ---- */
       @media (pointer: fine) {
@@ -74,26 +71,24 @@
       main { min-height: 100vh; display: grid; place-items: center; padding: 40px 20px; position: relative; }
 
       .profile {
-        width: min(620px, 100%);
-        border-radius: 24px;
-        padding: 36px 40px 30px;
-        position: relative;
-        overflow: hidden;
-        background: var(--card);
-        border: 1px solid var(--border);
+        width: min(640px, 100%); border-radius: 24px; padding: 34px 38px 30px;
+        position: relative; overflow: hidden;
+        background: var(--card); border: 1px solid var(--border);
         box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(124,108,255,.04), inset 0 1px rgba(255,255,255,.03);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
         animation: arrive .8s cubic-bezier(.2,.8,.2,1) both;
       }
-      .profile::before {
-        content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      .profile::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
         background: linear-gradient(130deg, rgba(124,108,255,.55), transparent 30%, transparent 70%, rgba(34,211,238,.45));
-        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor; mask-composite: exclude;
-        pointer-events: none;
-      }
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
       .profile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.03), transparent 58%); transform: translateX(-100%); animation: sweep 6s ease-in-out infinite; }
+
+      .lang-btn {
+        position: absolute; top: 16px; right: 16px; z-index: 5; appearance: none; cursor: pointer;
+        border: 1px solid var(--border-strong); background: rgba(255,255,255,.04); color: var(--muted);
+        border-radius: 9px; padding: 6px 10px; font: 11px 'DM Mono', monospace; transition: .2s ease;
+      }
+      .lang-btn:hover { color: #fff; border-color: var(--accent); background: rgba(124,108,255,.12); }
 
       .identity { display: grid; justify-items: center; gap: 6px; text-align: center; position: relative; z-index: 1; }
       .avatar-wrap { position: relative; width: 84px; height: 84px; border-radius: 50%; padding: 3px; background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent)); box-shadow: 0 0 30px rgba(124,108,255,.35); animation: ring-spin 8s linear infinite; }
@@ -102,39 +97,104 @@
       .status-dot { position: absolute; z-index: 2; right: 2px; bottom: 2px; width: 15px; height: 15px; border-radius: 50%; background: #4cd36e; border: 3px solid #0c0c12; box-shadow: 0 0 12px #4cd36e; }
       @keyframes ring-spin { to { transform: rotate(360deg); } }
 
-      h1 {
-        margin: 14px 0 0; font-family: 'Space Grotesk', Inter, sans-serif;
-        font-size: clamp(34px, 6vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1;
-        background: linear-gradient(90deg, #fff 0%, #d6d0ff 45%, #8f86ff 100%);
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-        text-shadow: 0 0 40px rgba(124,108,255,.25);
-      }
+      h1 { margin: 14px 0 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(34px, 6vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1;
+        background: linear-gradient(90deg, #fff 0%, #d6d0ff 45%, #8f86ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 40px rgba(124,108,255,.25); }
       .bio { color: var(--muted); font-size: 13px; margin: 8px 0 0; letter-spacing: .01em; }
-      .bio .loc { color: var(--muted-2); }
+
+      /* ---- Canlı durum ---- */
+      .live-status { position: relative; z-index: 1; display: grid; gap: 10px; margin-top: 22px; }
+      .live-card { position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; padding: 14px 15px; border-radius: 16px; border: 1px solid var(--border); background: rgba(255,255,255,.02); transition: border-color .25s ease, transform .25s ease; text-decoration: none; color: inherit; }
+      .live-card::before { content:""; position:absolute; inset:0; opacity:0; transition: opacity .35s ease; pointer-events:none; }
+      .live-card:hover { transform: translateY(-2px); }
+      .live-card.discord::before { background: radial-gradient(120% 120% at 0% 0%, rgba(114,137,218,.16), transparent 60%); }
+      .live-card.spotify::before { background: radial-gradient(120% 120% at 100% 0%, rgba(29,185,84,.14), transparent 60%); }
+      .live-card:hover::before { opacity: 1; }
+
+      .dot-wrap { position: relative; width: 13px; height: 13px; display: grid; place-items: center; flex-shrink: 0; }
+      .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dot-color, #5d5d65); box-shadow: 0 0 10px var(--dot-color, #5d5d65); transition: background .3s ease; }
+      .dot-wrap.online::after { content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--dot-color); animation: ping 1.8s ease-out infinite; }
+      @keyframes ping { 0% { transform: scale(.4); opacity:1; } 100% { transform: scale(2); opacity:0; } }
+      .brand-ic { width: 12px; height: 12px; color: #7289da; flex-shrink: 0; }
+      .live-card.spotify .brand-ic { color: #1db954; }
+      .dc-avatar-wrap { position: relative; width: 42px; height: 42px; flex-shrink: 0; }
+      .dc-avatar { width: 100%; height: 100%; border-radius: 12px; object-fit: cover; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+      .dc-avatar-wrap .dot-wrap { position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; background: #0c0c12; border-radius: 50%; display: grid; place-items: center; }
+      .live-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+      .live-label-row { display: flex; align-items: center; gap: 7px; }
+      .live-label { color: var(--muted-2); font: 10px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .live-value { color: var(--text); font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .live-sub { color: var(--muted); font: 11px 'DM Mono', monospace; }
+      .marquee { overflow: hidden; white-space: nowrap; }
+      .marquee span { display: inline-block; white-space: nowrap; }
+      .marquee.scroll span { animation: marquee 14s linear infinite; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+      .spotify-art { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; flex-shrink: 0; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+      .spotify-art.playing { animation: artGlow 2.6s ease-in-out infinite; }
+      @keyframes artGlow { 0%,100% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 14px rgba(29,185,84,.25); } 50% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 30px rgba(29,185,84,.55); } }
+      .eq { display: flex; align-items: flex-end; gap: 2px; height: 11px; }
+      .eq span { width: 3px; border-radius: 2px; background: #1db954; animation: eq 1s ease-in-out infinite; }
+      .eq span:nth-child(2) { animation-delay: .18s; }
+      .eq span:nth-child(3) { animation-delay: .36s; }
+      @keyframes eq { 0%,100% { height: 3px; } 50% { height: 11px; } }
+      .spotify-progress { height: 4px; background: #23232b; border-radius: 4px; margin-top: 7px; overflow: hidden; position: relative; }
+      .spotify-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg,#1db954,#3ce07e); border-radius: 4px; }
+      .spotify-progress::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: translateX(-100%); }
+      .spotify-progress.playing::after { animation: shimmer 2.2s ease-in-out infinite; }
+      @keyframes shimmer { 0% { transform: translateX(-100%); } 60%,100% { transform: translateX(100%); } }
 
       .links { display: flex; justify-content: center; gap: 10px; margin-top: 22px; position: relative; z-index: 1; flex-wrap: wrap; }
-      .links a {
-        width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px;
-        color: #d4d4d8; text-decoration: none; border: 1px solid var(--border-strong);
-        background: rgba(255,255,255,.03); transition: .22s ease; position: relative;
-      }
-      .links a svg { opacity: .85; transition: opacity .2s ease; }
+      .links a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; color: #d4d4d8; text-decoration: none; border: 1px solid var(--border-strong); background: rgba(255,255,255,.03); transition: .22s ease; position: relative; }
       .links a:hover { transform: translateY(-3px); border-color: var(--accent); background: rgba(124,108,255,.12); color: #fff; box-shadow: 0 8px 22px rgba(124,108,255,.25); }
-      .links a:hover svg { opacity: 1; }
       .links a:nth-child(1):hover { color:#e24990; border-color:#e24990; background:rgba(226,73,144,.12); box-shadow:0 8px 22px rgba(226,73,144,.25); }
       .links a:nth-child(2):hover { color:#40d26d; border-color:#40d26d; background:rgba(64,210,109,.12); box-shadow:0 8px 22px rgba(64,210,109,.25); }
       .links a:nth-child(3):hover { color:#f0f0f0; border-color:#f0f0f0; background:rgba(255,255,255,.1); box-shadow:0 8px 22px rgba(255,255,255,.15); }
       .links a:nth-child(4):hover { color:#7289da; border-color:#7289da; background:rgba(114,137,218,.12); box-shadow:0 8px 22px rgba(114,137,218,.25); }
       .links a:nth-child(5):hover { color:#70a8ff; border-color:#70a8ff; background:rgba(112,168,255,.12); box-shadow:0 8px 22px rgba(112,168,255,.25); }
       .links a:nth-child(6):hover { color:#ea4335; border-color:#ea4335; background:rgba(234,67,53,.12); box-shadow:0 8px 22px rgba(234,67,53,.25); }
+      .links svg { opacity: .85; transition: opacity .2s ease; }
+      .links a:hover svg { opacity: 1; }
 
       .divider { height: 1px; margin: 22px 0; background: linear-gradient(90deg, transparent, var(--border-strong), transparent); position: relative; z-index: 1; }
-
-      .copy-btn {
-        appearance: none; width: 100%; border: 1px solid var(--border-strong); border-radius: 12px; padding: 12px;
-        color: #b9b9c4; background: rgba(255,255,255,.03); font: 12px 'DM Mono', monospace; transition: .2s ease; position: relative; z-index: 1; cursor: pointer;
-      }
+      .copy-btn { appearance: none; width: 100%; border: 1px solid var(--border-strong); border-radius: 12px; padding: 12px; color: #b9b9c4; background: rgba(255,255,255,.03); font: 12px 'DM Mono', monospace; transition: .2s ease; position: relative; z-index: 1; cursor: pointer; }
       .copy-btn:hover { color: #fff; border-color: var(--accent); background: rgba(124,108,255,.12); }
+
+      /* ---- Bölümler ---- */
+      .section { position: relative; z-index: 1; margin-top: 24px; }
+      .section-title { display: flex; align-items: center; gap: 8px; color: var(--muted-2); font: 11px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+      .section-title::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+      .about-text { color: var(--muted); font-size: 13px; line-height: 1.7; }
+      .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+      .skill-tag { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border-strong); background: rgba(255,255,255,.03); color: var(--text); font-size: 12px; font-weight: 500; transition: .2s ease; animation: tagPop .5s ease both; }
+      .skill-tag:hover { border-color: var(--accent); background: rgba(124,108,255,.12); transform: translateY(-2px); }
+      @keyframes tagPop { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none; } }
+      .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .project-card { border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; background: rgba(255,255,255,.02); text-decoration: none; color: inherit; transition: .22s ease; }
+      .project-card:hover { border-color: var(--accent); transform: translateY(-3px); background: rgba(124,108,255,.08); box-shadow: 0 10px 26px rgba(124,108,255,.18); }
+      .project-name { color: var(--text); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+      .project-desc { color: var(--muted); font-size: 11px; margin-top: 4px; line-height: 1.4; }
+      .project-meta { color: var(--muted-2); font: 10px 'DM Mono', monospace; margin-top: 6px; }
+      .discord-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #7289da; background: rgba(114,137,218,.12); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: .2s ease; }
+      .discord-btn:hover { background: rgba(114,137,218,.22); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(114,137,218,.3); }
+
+      .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .stat-card { border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; background: rgba(255,255,255,.02); text-align: center; }
+      .stat-card .stat-label { color: var(--muted-2); font: 10px 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
+      .stat-card .stat-value { color: var(--text); font-size: 20px; font-weight: 700; margin-top: 6px; font-family: 'Space Grotesk', Inter, sans-serif; }
+      .stat-card .stat-sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+      .clock { font-variant-numeric: tabular-nums; }
+      .weather-emoji { font-size: 22px; }
+
+      .activity { display: grid; gap: 8px; }
+      .activity-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,.02); }
+      .activity-icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 15px; background: rgba(255,255,255,.04); flex-shrink: 0; }
+      .activity-text { color: var(--text); font-size: 12px; line-height: 1.4; }
+      .activity-text .repo { color: var(--accent); font-weight: 600; }
+      .activity-time { color: var(--muted-2); font: 10px 'DM Mono', monospace; margin-top: 2px; }
+
+      .qr-row { display: flex; align-items: center; gap: 14px; }
+      .qr-img { width: 96px; height: 96px; border-radius: 12px; border: 1px solid var(--border-strong); background: #fff; padding: 6px; }
+      .qr-text { color: var(--muted); font-size: 12px; line-height: 1.6; }
+      .qr-text a { color: var(--accent); text-decoration: none; word-break: break-all; }
 
       .now-playing { position: relative; z-index: 1; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: rgba(10,10,14,.7); }
       .now-playing-label { display: flex; align-items: center; gap: 6px; padding: 10px 14px 6px; color: var(--muted); font: 10px 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
@@ -160,73 +220,13 @@
       .views { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; color: #e8e8eb; font: 600 12px 'DM Mono', monospace; }
       .eye { width: 18px; height: 12px; border: 2px solid currentColor; border-radius: 100%; position: relative; opacity:.7; } .eye::after { content:""; position:absolute; width:4px; height:4px; border-radius:50%; background:currentColor; top:50%; left:50%; transform:translate(-50%,-50%); }
 
-      /* ---- Canlı durum (Discord + Spotify) ---- */
-      .live-status { position: relative; z-index: 1; display: grid; gap: 10px; margin-top: 22px; }
-      .live-card {
-        position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px;
-        padding: 14px 15px; border-radius: 16px; border: 1px solid var(--border);
-        background: rgba(255,255,255,.02); transition: border-color .25s ease, transform .25s ease;
-        text-decoration: none; color: inherit;
-      }
-      .live-card::before { content:""; position:absolute; inset:0; opacity:0; transition: opacity .35s ease; pointer-events:none; }
-      .live-card:hover { transform: translateY(-2px); }
-      .live-card.discord::before { background: radial-gradient(120% 120% at 0% 0%, rgba(114,137,218,.16), transparent 60%); }
-      .live-card.spotify::before { background: radial-gradient(120% 120% at 100% 0%, rgba(29,185,84,.14), transparent 60%); }
-      .live-card:hover::before { opacity: 1; }
-
-      .dot-wrap { position: relative; width: 13px; height: 13px; display: grid; place-items: center; flex-shrink: 0; }
-      .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dot-color, #5d5d65); box-shadow: 0 0 10px var(--dot-color, #5d5d65); transition: background .3s ease; }
-      .dot-wrap.online::after { content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--dot-color); animation: ping 1.8s ease-out infinite; }
-      @keyframes ping { 0% { transform: scale(.4); opacity:1; } 100% { transform: scale(2); opacity:0; } }
-
-      .brand-ic { width: 12px; height: 12px; color: #7289da; flex-shrink: 0; }
-      .live-card.spotify .brand-ic { color: #1db954; }
-      .dc-avatar-wrap { position: relative; width: 42px; height: 42px; flex-shrink: 0; }
-      .dc-avatar { width: 100%; height: 100%; border-radius: 12px; object-fit: cover; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
-      .dc-avatar-wrap .dot-wrap { position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; background: #0c0c12; border-radius: 50%; display: grid; place-items: center; }
-
-      .live-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
-      .live-label-row { display: flex; align-items: center; gap: 7px; }
-      .live-label { color: var(--muted-2); font: 10px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
-      .live-value { color: var(--text); font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .live-sub { color: var(--muted); font: 11px 'DM Mono', monospace; }
-
-      .marquee { overflow: hidden; white-space: nowrap; }
-      .marquee span { display: inline-block; white-space: nowrap; }
-      .marquee.scroll span { animation: marquee 14s linear infinite; }
-      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-      .spotify-art { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; flex-shrink: 0; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
-      .spotify-art.playing { animation: artGlow 2.6s ease-in-out infinite; }
-      @keyframes artGlow { 0%,100% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 14px rgba(29,185,84,.25); } 50% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 30px rgba(29,185,84,.55); } }
-
-      .eq { display: flex; align-items: flex-end; gap: 2px; height: 11px; }
-      .eq span { width: 3px; border-radius: 2px; background: #1db954; animation: eq 1s ease-in-out infinite; }
-      .eq span:nth-child(2) { animation-delay: .18s; }
-      .eq span:nth-child(3) { animation-delay: .36s; }
-      @keyframes eq { 0%,100% { height: 3px; } 50% { height: 11px; } }
-
-      .spotify-progress { height: 4px; background: #23232b; border-radius: 4px; margin-top: 7px; overflow: hidden; position: relative; }
-      .spotify-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg,#1db954,#3ce07e); border-radius: 4px; }
-      .spotify-progress::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: translateX(-100%); }
-      .spotify-progress.playing::after { animation: shimmer 2.2s ease-in-out infinite; }
-      @keyframes shimmer { 0% { transform: translateX(-100%); } 60%,100% { transform: translateX(100%); } }
-
       footer { position: relative; z-index: 1; text-align: center; margin-top: 22px; color: var(--muted-2); font: 11px 'DM Mono', monospace; }
       footer a { color: var(--muted); text-decoration: none; transition: .2s; }
       footer a:hover { color: var(--accent); }
       footer .sep { margin: 0 8px; opacity:.5; }
 
-      .hint { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); color: var(--muted-2); font: 11px 'DM Mono',monospace; letter-spacing:.06em; animation: fade 1s 1s both; }
-
       /* ---- Giriş ekranı ---- */
-      .entry-screen {
-        position: fixed; inset: 0; z-index: 10000;
-        background: radial-gradient(120% 120% at 50% 0%, #14141f 0%, #07070c 60%);
-        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-        cursor: pointer; transition: opacity .6s ease, transform .6s ease;
-        -webkit-tap-highlight-color: transparent;
-      }
+      .entry-screen { position: fixed; inset: 0; z-index: 10000; background: radial-gradient(120% 120% at 50% 0%, #14141f 0%, #07070c 60%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; cursor: pointer; transition: opacity .6s ease, transform .6s ease; -webkit-tap-highlight-color: transparent; }
       .entry-screen.hide { opacity: 0; pointer-events: none; transform: scale(1.04); }
       .entry-avatar-wrap { width: 84px; height: 84px; border-radius: 50%; padding: 3px; background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent)); box-shadow: 0 0 40px rgba(124,108,255,.4); animation: ring-spin 8s linear infinite; }
       .entry-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
@@ -239,24 +239,22 @@
       @keyframes pulse { 0%,100% { opacity:.4; } 50% { opacity:1; } }
       @keyframes arrive { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
       @keyframes sweep { 0%,70% { transform:translateX(-115%); } 100% { transform:translateX(115%); } }
-      @keyframes fade { to { opacity:1; } } .hint { opacity:0; }
 
       @media (max-width: 480px) {
         .profile { padding: 30px 22px; }
-        .extras { grid-template-columns: 1fr; }
+        .extras, .projects { grid-template-columns: 1fr; }
+        .stats-grid { grid-template-columns: 1fr 1fr; }
         .links { gap: 8px; }
         .links a { width: 38px; height: 38px; }
       }
       @media (prefers-reduced-motion: reduce) {
-        .blob, .stars, .profile::after, .avatar-wrap, .entry-avatar-wrap, h1 { animation: none !important; }
+        .blob, .stars, .profile::after, .avatar-wrap, .entry-avatar-wrap, h1, .skill-tag { animation: none !important; }
       }
     </style>
   </head>
   <body>
     <div class="aurora" aria-hidden="true">
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="blob b3"></div>
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
     </div>
     <div class="stars" aria-hidden="true"></div>
     <div class="noise" aria-hidden="true"></div>
@@ -268,19 +266,21 @@
       <div class="entry-avatar-wrap"><img class="entry-avatar" src="profile.jpg" alt="Frazny" /></div>
       <span class="entry-name">Frazny</span>
       <span class="entry-music">Mist — EsDeeKid ft. Rico Ace</span>
-      <span class="entry-hint">girmek için tıkla</span>
-      <span class="entry-browser-note">müzik için tarayıcıda aç</span>
+      <span class="entry-hint" data-i18n="enterHint">girmek için tıkla</span>
+      <span class="entry-browser-note" data-i18n="browserNote">müzik için tarayıcıda aç</span>
     </div>
 
     <main>
       <section class="profile" aria-label="Profil kartı">
+        <button class="lang-btn" id="lang-btn" type="button">EN</button>
+
         <div class="identity">
           <div class="avatar-wrap">
             <img class="avatar" src="profile.jpg" alt="Frazny profil fotoğrafı" />
             <span class="status-dot" title="Çevrimiçi"></span>
           </div>
           <h1 id="typewriter"></h1>
-          <p class="bio">Digital Creator · <span class="loc">Gaziantep</span></p>
+          <p class="bio" data-i18n="bio">Digital Creator · Gaziantep</p>
         </div>
 
         <div class="live-status" aria-label="Canlı durum">
@@ -294,7 +294,7 @@
                 <svg class="brand-ic" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.079.037c-.42.757-.892 1.922-1.223 2.928C.494 9.635.165 14.53.348 19.374a.085.085 0 0 0 .032.06 19.9 19.9 0 0 0 6.008 3.039.074.074 0 0 0 .08-.027c.462-.63.874-1.295 1.226-1.994a.071.071 0 0 0-.04-.095 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.095c.352.699.764 1.364 1.226 1.994a.073.073 0 0 0 .08.027 19.84 19.84 0 0 0 6.005-3.038.077.077 0 0 0 .032-.06c.223-5.52-.373-10.373-2.028-14.065a.073.073 0 0 0-.079-.037zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                 <span class="live-label">Discord</span>
               </div>
-              <span class="live-value" id="discord-status">bağlanıyor…</span>
+              <span class="live-value" id="discord-status" data-i18n="connecting">bağlanıyor…</span>
             </div>
           </a>
           <a class="live-card spotify" id="spotify-link" href="https://open.spotify.com/user/8x5yr03fshgcl5rtsm2z0fwpk" target="_blank" rel="noreferrer">
@@ -305,7 +305,7 @@
                 <span class="live-label">Spotify</span>
                 <span class="eq" id="eq" hidden><span></span><span></span><span></span></span>
               </div>
-              <span class="live-value" id="spotify-status">—</span>
+              <span class="live-value" id="spotify-status" data-i18n="notListening">şu an müzik dinlemiyor</span>
               <div class="marquee" id="spotify-title" hidden><span id="spotify-title-inner"></span></div>
               <span class="live-sub" id="spotify-artist" hidden></span>
               <div class="spotify-progress" id="spotify-progress-wrap" hidden><div class="spotify-progress-bar" id="spotify-progress-bar"></div></div>
@@ -326,8 +326,90 @@
 
         <div class="divider"></div>
 
+        <!-- Hakkımda -->
+        <section class="section">
+          <div class="section-title" data-i18n="aboutTitle">Hakkımda</div>
+          <p class="about-text" data-i18n="aboutText">Merhaba! Ben Frazny. Gaziantep'ten dijital içerik üreticisiyim. İçerik üretimi, video edit ve tasarım ile ilgileniyorum.</p>
+        </section>
+
+        <!-- Yetenekler -->
+        <section class="section">
+          <div class="section-title" data-i18n="skillsTitle">Yetenekler</div>
+          <div class="skills">
+            <span class="skill-tag" data-i18n="skill1">İçerik Üretimi</span>
+            <span class="skill-tag" data-i18n="skill2">Video Edit</span>
+            <span class="skill-tag" data-i18n="skill3">Tasarım</span>
+            <span class="skill-tag" data-i18n="skill4">Fotoğraf</span>
+            <span class="skill-tag" data-i18n="skill5">Müzik</span>
+          </div>
+        </section>
+
+        <!-- Projeler -->
+        <section class="section">
+          <div class="section-title" data-i18n="projectsTitle">Projeler</div>
+          <div class="projects" id="projects">
+            <div class="project-card" style="grid-column:1/-1;color:var(--muted);font-size:12px" data-i18n="loading">yükleniyor…</div>
+          </div>
+        </section>
+
+        <!-- Discord sunucusu -->
+        <section class="section">
+          <div class="section-title" data-i18n="discordServerTitle">Discord Sunucusu</div>
+          <a class="discord-btn" id="discord-server-link" href="https://discord.gg/PLACEHOLDER" target="_blank" rel="noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.079.037c-.42.757-.892 1.922-1.223 2.928C.494 9.635.165 14.53.348 19.374a.085.085 0 0 0 .032.06 19.9 19.9 0 0 0 6.008 3.039.074.074 0 0 0 .08-.027c.462-.63.874-1.295 1.226-1.994a.071.071 0 0 0-.04-.095 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.095c.352.699.764 1.364 1.226 1.994a.073.073 0 0 0 .08.027 19.84 19.84 0 0 0 6.005-3.038.077.077 0 0 0 .032-.06c.223-5.52-.373-10.373-2.028-14.065a.073.073 0 0 0-.079-.037zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            <span data-i18n="join">Katıl</span>
+          </a>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Canlı istatistikler -->
+        <section class="section">
+          <div class="section-title" data-i18n="statsTitle">Canlı İstatistikler</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label" data-i18n="clockLabel">Saat</div>
+              <div class="stat-value clock" id="clock">--:--:--</div>
+              <div class="stat-sub">Gaziantep</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label" data-i18n="weatherLabel">Hava</div>
+              <div class="stat-value"><span class="weather-emoji" id="weather-emoji">🌡</span></div>
+              <div class="stat-sub" id="weather-text" data-i18n="weatherLoading">yükleniyor…</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">GitHub</div>
+              <div class="stat-value" id="gh-followers">–</div>
+              <div class="stat-sub" id="gh-repos" data-i18n="repos">Repo</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Son aktivite -->
+        <section class="section">
+          <div class="section-title" data-i18n="activityTitle">Son Aktivite</div>
+          <div class="activity" id="activity">
+            <div class="activity-item" style="color:var(--muted);font-size:12px" data-i18n="loading">yükleniyor…</div>
+          </div>
+        </section>
+
+        <!-- QR kod -->
+        <section class="section">
+          <div class="section-title" data-i18n="qrTitle">Paylaş</div>
+          <div class="qr-row">
+            <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Ffrazny.is-a.dev" alt="QR kod" />
+            <div class="qr-text">
+              <span data-i18n="qrText">Siteyi QR kod ile paylaşabilirsiniz.</span>
+              <br />
+              <a href="https://frazny.is-a.dev" target="_blank" rel="noreferrer">frazny.is-a.dev</a>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
         <div class="now-playing" aria-label="Şu an dinleniyor">
-          <div class="now-playing-label">şu an dinleniyor</div>
+          <div class="now-playing-label" data-i18n="nowPlaying">şu an dinleniyor</div>
           <div class="audio-player">
             <div class="audio-info">
               <span class="audio-title">Mist</span>
@@ -347,16 +429,14 @@
           </div>
         </div>
 
-        <div class="divider"></div>
-
         <section class="extras" aria-label="Profil bilgileri">
           <a class="mini-card" href="https://discord.com/channels/@frazny" target="_blank" rel="noreferrer">
             <span class="mini-title"><span class="status-dot idle" id="discord-card-dot"></span> Discord</span>
-            <span class="mini-copy" id="discord-card-copy">Bağlantıyı aç</span>
+            <span class="mini-copy" id="discord-card-copy" data-i18n="open">Bağlantıyı aç</span>
           </a>
           <a class="mini-card" href="https://github.com/Frazny" target="_blank" rel="noreferrer">
-            <span class="mini-title">⌘ GitHub projeleri</span>
-            <span class="mini-copy">@Frazny profilini görüntüle</span>
+            <span class="mini-title">⌘ <span data-i18n="githubProjects">GitHub projeleri</span></span>
+            <span class="mini-copy" data-i18n="viewProfile">@Frazny profilini görüntüle</span>
           </a>
         </section>
 
@@ -366,20 +446,144 @@
       <footer>
         <span>© <span id="year">2026</span> Frazny</span>
         <span class="sep">·</span>
-        <a href="privacy.html">Gizlilik</a>
+        <a href="privacy.html" data-i18n="privacy">Gizlilik</a>
         <span class="sep">·</span>
-        <a href="terms.html">Koşullar</a>
+        <a href="terms.html" data-i18n="terms">Koşullar</a>
       </footer>
     </main>
 
     <script>
-      // Yıl
+      // ===== Dil desteği (TR/EN) =====
+      const I18N = {
+        tr: {
+          bio: 'Digital Creator · Gaziantep',
+          aboutTitle: 'Hakkımda',
+          aboutText: 'Merhaba! Ben Frazny. Gaziantep\'ten dijital içerik üreticisiyim. İçerik üretimi, video edit ve tasarım ile ilgileniyorum.',
+          skillsTitle: 'Yetenekler',
+          skill1: 'İçerik Üretimi', skill2: 'Video Edit', skill3: 'Tasarım', skill4: 'Fotoğraf', skill5: 'Müzik',
+          projectsTitle: 'Projeler',
+          discordServerTitle: 'Discord Sunucusu',
+          join: 'Katıl',
+          statsTitle: 'Canlı İstatistikler',
+          clockLabel: 'Saat', weatherLabel: 'Hava',
+          weatherLoading: 'yükleniyor…',
+          followers: 'Takipçi', repos: 'Repo',
+          activityTitle: 'Son Aktivite',
+          noActivity: 'Henüz aktivite yok',
+          qrTitle: 'Paylaş',
+          qrText: 'Siteyi QR kod ile paylaşabilirsiniz.',
+          nowPlaying: 'şu an dinleniyor',
+          enterHint: 'girmek için tıkla',
+          browserNote: 'müzik için tarayıcıda aç',
+          connecting: 'bağlanıyor…',
+          notListening: 'şu an müzik dinlemiyor',
+          online: 'Çevrimiçi', idle: 'Boşta', dnd: 'Rahatsız etmeyin', offline: 'Çevrimdışı',
+          lastSeen: 'Son görülme',
+          open: 'Bağlantıyı aç',
+          githubProjects: 'GitHub projeleri',
+          viewProfile: '@Frazny profilini görüntüle',
+          privacy: 'Gizlilik', terms: 'Koşullar',
+          loading: 'yükleniyor…'
+        },
+        en: {
+          bio: 'Digital Creator · Gaziantep',
+          aboutTitle: 'About',
+          aboutText: 'Hi! I\'m Frazny, a digital creator from Gaziantep. I\'m into content creation, video editing and design.',
+          skillsTitle: 'Skills',
+          skill1: 'Content Creation', skill2: 'Video Editing', skill3: 'Design', skill4: 'Photography', skill5: 'Music',
+          projectsTitle: 'Projects',
+          discordServerTitle: 'Discord Server',
+          join: 'Join',
+          statsTitle: 'Live Stats',
+          clockLabel: 'Clock', weatherLabel: 'Weather',
+          weatherLoading: 'loading…',
+          followers: 'Followers', repos: 'Repos',
+          activityTitle: 'Recent Activity',
+          noActivity: 'No activity yet',
+          qrTitle: 'Share',
+          qrText: 'Share the site with this QR code.',
+          nowPlaying: 'now playing',
+          enterHint: 'click to enter',
+          browserNote: 'open in a browser for music',
+          connecting: 'connecting…',
+          notListening: 'not listening right now',
+          online: 'Online', idle: 'Idle', dnd: 'Do Not Disturb', offline: 'Offline',
+          lastSeen: 'Last seen',
+          open: 'Open link',
+          githubProjects: 'GitHub projects',
+          viewProfile: 'View @Frazny profile',
+          privacy: 'Privacy', terms: 'Terms',
+          loading: 'loading…'
+        }
+      };
+      let lang = localStorage.getItem('frazny_lang') || 'tr';
+      const t = k => (I18N[lang] && I18N[lang][k]) || (I18N.tr[k] || k);
+      function applyLang() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const k = el.getAttribute('data-i18n');
+          if (I18N[lang][k] !== undefined) el.textContent = I18N[lang][k];
+        });
+        document.documentElement.lang = lang;
+        document.getElementById('lang-btn').textContent = lang === 'tr' ? 'EN' : 'TR';
+        if (lastLanyard) updateLanyard(lastLanyard);
+        updateClock();
+      }
+      document.getElementById('lang-btn').addEventListener('click', () => {
+        lang = lang === 'tr' ? 'en' : 'tr';
+        localStorage.setItem('frazny_lang', lang);
+        applyLang();
+      });
+
+      // ===== Yıl =====
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // ---- Canlı durum: Discord + Spotify (Lanyard) ----
-      // 👉 Aşağıya kendi Discord kullanıcı ID'nizi yazın (sağ alttaki ayarlar > Gelişmiş > Geliştirici modu > profilinize sağ tık > Kopyala ID)
+      // ===== Ziyaretçi sayacı =====
+      fetch('https://frazny-counter.yusufakbulit.workers.dev/')
+        .then(r => r.json())
+        .then(data => { document.querySelector('#views').textContent = String(data.count).padStart(3, '0'); })
+        .catch(() => { document.querySelector('#views').textContent = '001'; });
+
+      // ===== Kopyala butonu =====
+      document.querySelector('#copy-name').addEventListener('click', async () => {
+        await navigator.clipboard.writeText('fraznybusiness@gmail.com');
+        const btn = document.querySelector('#copy-name');
+        btn.textContent = 'Kopyalandı ✓';
+        setTimeout(() => btn.textContent = 'fraznybusiness@gmail.com', 1700);
+      });
+
+      // ===== Sekme başlığı typewriter + pulse =====
+      const titleText = 'Frazny';
+      let tIdx = 0;
+      function titleType() {
+        document.title = titleText.slice(0, tIdx) + '|';
+        tIdx++;
+        if (tIdx <= titleText.length) { setTimeout(titleType, 130); }
+        else { setTimeout(titlePulse, 800); }
+      }
+      function titlePulse() {
+        const frames = ['Frazny ✦', 'Frazny ✧', 'Frazny ✦', 'Frazny'];
+        let i = 0;
+        (function next() {
+          document.title = frames[i++];
+          if (i < frames.length) setTimeout(next, 400);
+          else setTimeout(() => { tIdx = 0; titleType(); }, 2000);
+        })();
+      }
+      titleType();
+
+      // ===== Sayfa içi typewriter =====
+      const typeEl = document.getElementById('typewriter');
+      let pIdx = 0;
+      function typeWriter() {
+        typeEl.textContent = 'Frazny'.slice(0, pIdx);
+        if (pIdx <= 6) { pIdx++; setTimeout(typeWriter, 120); }
+      }
+      setTimeout(typeWriter, 400);
+
+      // ===== Canlı durum: Discord + Spotify (Lanyard) =====
       const DISCORD_ID = '780466364636332062';
       let lastSeen = parseInt(localStorage.getItem('lanyard_lastseen') || '0', 10);
+      let lastLanyard = null;
 
       function fmtAgo(ts) {
         const s = Math.max(1, Math.round((Date.now() - ts) / 1000));
@@ -392,7 +596,8 @@
       }
 
       function updateLanyard(data) {
-        const status = data.discord_status || 'offline'; // online / idle / dnd / offline
+        lastLanyard = data;
+        const status = data.discord_status || 'offline';
         const dotWrap = document.getElementById('discord-dot-wrap');
         const statusEl = document.getElementById('discord-status');
         const cardDot = document.getElementById('discord-card-dot');
@@ -403,18 +608,12 @@
           localStorage.setItem('lanyard_lastseen', String(lastSeen));
         }
 
-        // Discord profil fotoğrafı (canlı)
         const du = data.discord_user;
         if (du && du.avatar) {
           document.getElementById('dc-avatar').src = 'https://cdn.discordapp.com/avatars/' + du.id + '/' + du.avatar + '.png?size=128';
         }
 
-        const map = {
-          online: ['Çevrimiçi', '#4cd36e'],
-          idle: ['Boşta', '#f0b429'],
-          dnd: ['Rahatsız etmeyin', '#f04747'],
-          offline: ['Çevrimdışı', '#5d5d65']
-        };
+        const map = { online: [t('online'), '#4cd36e'], idle: [t('idle'), '#f0b429'], dnd: [t('dnd'), '#f04747'], offline: [t('offline'), '#5d5d65'] };
         const [label, color] = map[status] || map.offline;
         dotWrap.style.setProperty('--dot-color', color);
         dotWrap.classList.toggle('online', status !== 'offline');
@@ -423,14 +622,13 @@
         cardDot.classList.remove('idle');
 
         if (status === 'offline') {
-          statusEl.textContent = lastSeen ? 'Son görülme: ' + fmtAgo(lastSeen) : 'Çevrimdışı';
-          cardCopy.textContent = lastSeen ? 'Son görülme: ' + fmtAgo(lastSeen) : 'Bağlantıyı aç';
+          statusEl.textContent = lastSeen ? t('lastSeen') + ': ' + fmtAgo(lastSeen) : t('offline');
+          cardCopy.textContent = lastSeen ? t('lastSeen') + ': ' + fmtAgo(lastSeen) : t('open');
         } else {
           statusEl.textContent = label;
-          cardCopy.textContent = 'Bağlantıyı aç';
+          cardCopy.textContent = t('open');
         }
 
-        // Spotify: aktivite tipi 2 = Dinleniyor
         const spot = data.activities && data.activities.find(a => a.type === 2 && a.name === 'Spotify');
         const art = document.getElementById('spotify-art');
         const eq = document.getElementById('eq');
@@ -445,13 +643,11 @@
           art.src = spot.assets.large_image.replace('spotify:', 'https://i.scdn.co/image/');
           art.hidden = false;
           art.classList.add('playing');
-          // Kart tıklanınca şarkıyı Spotify'da aç
           const spotLink = document.getElementById('spotify-link');
           if (spot.sync_id) spotLink.href = 'https://open.spotify.com/track/' + spot.sync_id;
           else spotLink.href = 'https://open.spotify.com/user/8x5yr03fshgcl5rtsm2z0fwpk';
           eq.hidden = false;
           spotStatus.hidden = true;
-          // Uzun başlıklar için kayan (marquee) animasyon
           if (spot.details.length > 18) {
             titleInner.textContent = spot.details + '   ✦   ' + spot.details;
             titleWrap.classList.add('scroll');
@@ -472,7 +668,7 @@
           art.classList.remove('playing');
           eq.hidden = true;
           spotStatus.hidden = false;
-          spotStatus.textContent = 'şu an müzik dinlemiyor';
+          spotStatus.textContent = t('notListening');
           titleWrap.hidden = true;
           titleWrap.classList.remove('scroll');
           artistEl.hidden = true;
@@ -482,60 +678,100 @@
       }
 
       async function pollLanyard() {
-        if (!DISCORD_ID || DISCORD_ID === 'YOUR_DISCORD_ID') return;
         try {
           const res = await fetch('https://api.lanyard.rest/v1/users/' + DISCORD_ID);
           const json = await res.json();
           if (json.success && json.data) updateLanyard(json.data);
-        } catch (e) { /* sessizce geç */ }
+        } catch (e) {}
       }
       pollLanyard();
       setInterval(pollLanyard, 30000);
 
-      // Ziyaretçi sayacı
-      fetch('https://frazny-counter.yusufakbulit.workers.dev/')
-        .then(r => r.json())
-        .then(data => { document.querySelector('#views').textContent = String(data.count).padStart(3, '0'); })
-        .catch(() => { document.querySelector('#views').textContent = '001'; });
-
-      // Kopyala butonu
-      document.querySelector('#copy-name').addEventListener('click', async () => {
-        await navigator.clipboard.writeText('fraznybusiness@gmail.com');
-        const btn = document.querySelector('#copy-name');
-        btn.textContent = 'Kopyalandı ✓';
-        setTimeout(() => btn.textContent = 'fraznybusiness@gmail.com', 1700);
-      });
-
-      // Sekme başlığı typewriter + pulse
-      const titleText = 'Frazny';
-      let tIdx = 0;
-      function titleType() {
-        document.title = titleText.slice(0, tIdx) + '|';
-        tIdx++;
-        if (tIdx <= titleText.length) { setTimeout(titleType, 130); }
-        else { setTimeout(titlePulse, 800); }
+      // ===== Canlı saat (Gaziantep) =====
+      function updateClock() {
+        const el = document.getElementById('clock');
+        const now = new Date();
+        const parts = new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-GB', {
+          timeZone: 'Europe/Istanbul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+        }).formatToParts(now);
+        const get = p => (parts.find(x => x.type === p) || {}).value || '00';
+        el.textContent = get('hour') + ':' + get('minute') + ':' + get('second');
       }
-      function titlePulse() {
-        const frames = ['Frazny ✦', 'Frazny ✧', 'Frazny ✦', 'Frazny'];
-        let i = 0;
-        (function next() {
-          document.title = frames[i++];
-          if (i < frames.length) setTimeout(next, 400);
-          else setTimeout(() => { tIdx = 0; titleType(); }, 2000);
-        })();
-      }
-      titleType();
+      updateClock();
+      setInterval(updateClock, 1000);
 
-      // Sayfa içi typewriter
-      const typeEl = document.getElementById('typewriter');
-      let pIdx = 0;
-      function typeWriter() {
-        typeEl.textContent = 'Frazny'.slice(0, pIdx);
-        if (pIdx <= 6) { pIdx++; setTimeout(typeWriter, 120); }
+      // ===== Hava durumu (Gaziantep) =====
+      const WEATHER = {
+        0: ['☀️', 'Açık', 'Clear'], 1: ['🌤', 'Az bulutlu', 'Mainly clear'], 2: ['⛅', 'Parçalı bulutlu', 'Partly cloudy'],
+        3: ['☁️', 'Bulutlu', 'Overcast'], 45: ['🌫', 'Sis', 'Fog'], 48: ['🌫', 'Sis', 'Fog'],
+        51: ['🌦', 'Çisenti', 'Drizzle'], 53: ['🌦', 'Çisenti', 'Drizzle'], 55: ['🌦', 'Çisenti', 'Drizzle'],
+        61: ['🌧', 'Yağmur', 'Rain'], 63: ['🌧', 'Yağmur', 'Rain'], 65: ['🌧', 'Şiddetli yağmur', 'Heavy rain'],
+        71: ['🌨', 'Kar', 'Snow'], 73: ['🌨', 'Kar', 'Snow'], 75: ['🌨', 'Yoğun kar', 'Heavy snow'],
+        80: ['🌦', 'Sağanak', 'Rain showers'], 81: ['🌦', 'Sağanak', 'Rain showers'], 82: ['⛈', 'Gök gürültülü', 'Thunderstorm'],
+        95: ['⛈', 'Gök gürültülü', 'Thunderstorm']
+      };
+      async function loadWeather() {
+        try {
+          const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0662&longitude=37.3833&current_weather=true');
+          const d = await res.json();
+          const w = d.current_weather;
+          const info = WEATHER[w.weathercode] || ['🌡', '–', '–'];
+          document.getElementById('weather-emoji').textContent = info[0];
+          document.getElementById('weather-text').textContent = Math.round(w.temperature) + '°C · ' + (lang === 'tr' ? info[1] : info[2]);
+        } catch (e) {
+          document.getElementById('weather-text').textContent = '–';
+        }
       }
-      setTimeout(typeWriter, 400);
+      loadWeather();
 
-      // Audio player
+      // ===== GitHub istatistikleri + projeler + aktivite =====
+      async function loadGitHub() {
+        try {
+          const u = await (await fetch('https://api.github.com/users/Frazny')).json();
+          document.getElementById('gh-followers').textContent = u.followers ?? '–';
+          document.getElementById('gh-repos').textContent = t('repos') + ': ' + (u.public_repos ?? '–');
+        } catch (e) {}
+        try {
+          const repos = await (await fetch('https://api.github.com/users/Frazny/repos?sort=updated&per_page=6')).json();
+          const box = document.getElementById('projects');
+          if (Array.isArray(repos) && repos.length) {
+            box.innerHTML = repos.map(r => `
+              <a class="project-card" href="${r.html_url}" target="_blank" rel="noreferrer">
+                <div class="project-name">${r.name}</div>
+                <div class="project-desc">${r.description || (lang === 'tr' ? 'Açıklama yok' : 'No description')}</div>
+                <div class="project-meta">⭐ ${r.stargazers_count} · ${r.language || '—'}</div>
+              </a>`).join('');
+          } else {
+            box.innerHTML = '<div class="project-card" style="grid-column:1/-1;color:var(--muted);font-size:12px">' + t('noActivity') + '</div>';
+          }
+        } catch (e) {}
+        try {
+          const events = await (await fetch('https://api.github.com/users/Frazny/events/public?per_page=6')).json();
+          const box = document.getElementById('activity');
+          if (Array.isArray(events) && events.length) {
+            const icons = { PushEvent: '📦', CreateEvent: '✨', PullRequestEvent: '🔀', IssuesEvent: '🐛', WatchEvent: '⭐', ForkEvent: '🍴' };
+            box.innerHTML = events.slice(0, 5).map(ev => {
+              const repo = ev.repo ? ev.repo.name.split('/').pop() : '';
+              const icon = icons[ev.type] || '📌';
+              const when = new Date(ev.created_at);
+              const ago = Math.max(0, Math.round((Date.now() - when) / 3600000));
+              const time = ago < 1 ? (lang === 'tr' ? 'az önce' : 'just now') : (ago < 24 ? ago + (lang === 'tr' ? ' sa önce' : 'h ago') : Math.round(ago / 24) + (lang === 'tr' ? ' gün önce' : 'd ago'));
+              return `<div class="activity-item">
+                <div class="activity-icon">${icon}</div>
+                <div>
+                  <div class="activity-text">${ev.type === 'PushEvent' ? (lang === 'tr' ? 'commit gönderdi' : 'pushed to') : ev.type === 'CreateEvent' ? (lang === 'tr' ? 'oluşturdu' : 'created') : ev.type} <span class="repo">${repo}</span></div>
+                  <div class="activity-time">${time}</div>
+                </div>
+              </div>`;
+            }).join('');
+          } else {
+            box.innerHTML = '<div class="activity-item" style="color:var(--muted);font-size:12px">' + t('noActivity') + '</div>';
+          }
+        } catch (e) {}
+      }
+      loadGitHub();
+
+      // ===== Audio player =====
       const audio = document.getElementById('audio');
       const playBtn = document.getElementById('play-btn');
       const iconPlay = document.getElementById('icon-play');
@@ -546,7 +782,6 @@
 
       function fmt(s) { return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'); }
       function setPlaying(p) { iconPlay.style.display = p ? 'none' : 'block'; iconPause.style.display = p ? 'block' : 'none'; }
-
       audio.addEventListener('timeupdate', () => {
         if (audio.duration) {
           progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
@@ -563,10 +798,9 @@
         audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
       });
 
-      // Giriş ekranı
+      // ===== Giriş ekranı =====
       const entryScreen = document.getElementById('entry-screen');
       audio.load();
-
       let entered = false;
       function enterSite() {
         if (entered) return;
@@ -576,20 +810,16 @@
         setTimeout(() => { if (entryScreen.parentNode) entryScreen.remove(); }, 650);
         audio.play().then(() => setPlaying(true)).catch(() => {});
       }
-
       entryScreen.addEventListener('click', enterSite);
       entryScreen.addEventListener('touchend', enterSite, { passive: true });
       document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') enterSite(); });
 
-      // Custom cursor (sadece giriş sonrası)
+      // ===== Custom cursor =====
       if (matchMedia('(pointer: fine)').matches) {
         const dot = document.querySelector('.cursor-dot');
         const ring = document.querySelector('.cursor-ring');
         let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
-        addEventListener('mousemove', e => {
-          mx = e.clientX; my = e.clientY;
-          dot.style.left = mx+'px'; dot.style.top = my+'px';
-        });
+        addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
         document.querySelectorAll('a, button').forEach(el => {
           el.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
           el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
@@ -600,6 +830,9 @@
           requestAnimationFrame(animCursor);
         })();
       }
+
+      // ===== Başlangıç =====
+      applyLang();
     </script>
   </body>
 </html>
