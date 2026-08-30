@@ -161,17 +161,49 @@
       .eye { width: 18px; height: 12px; border: 2px solid currentColor; border-radius: 100%; position: relative; opacity:.7; } .eye::after { content:""; position:absolute; width:4px; height:4px; border-radius:50%; background:currentColor; top:50%; left:50%; transform:translate(-50%,-50%); }
 
       /* ---- Canlı durum (Discord + Spotify) ---- */
-      .live-status { position: relative; z-index: 1; display: grid; gap: 8px; margin-top: 20px; }
-      .live-row { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 13px; background: rgba(255,255,255,.02); transition: border-color .2s ease; }
-      .live-row.discord:hover { border-color: #7289da; }
-      .live-row.spotify:hover { border-color: #1db954; }
-      .live-dot { width: 9px; height: 9px; border-radius: 50%; background: #5d5d65; flex-shrink: 0; transition: background .3s ease, box-shadow .3s ease; }
-      .live-row .live-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+      .live-status { position: relative; z-index: 1; display: grid; gap: 10px; margin-top: 22px; }
+      .live-card {
+        position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px;
+        padding: 14px 15px; border-radius: 16px; border: 1px solid var(--border);
+        background: rgba(255,255,255,.02); transition: border-color .25s ease, transform .25s ease;
+      }
+      .live-card::before { content:""; position:absolute; inset:0; opacity:0; transition: opacity .35s ease; pointer-events:none; }
+      .live-card:hover { transform: translateY(-2px); }
+      .live-card.discord::before { background: radial-gradient(120% 120% at 0% 0%, rgba(114,137,218,.16), transparent 60%); }
+      .live-card.spotify::before { background: radial-gradient(120% 120% at 100% 0%, rgba(29,185,84,.14), transparent 60%); }
+      .live-card:hover::before { opacity: 1; }
+
+      .dot-wrap { position: relative; width: 13px; height: 13px; display: grid; place-items: center; flex-shrink: 0; }
+      .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dot-color, #5d5d65); box-shadow: 0 0 10px var(--dot-color, #5d5d65); transition: background .3s ease; }
+      .dot-wrap.online::after { content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--dot-color); animation: ping 1.8s ease-out infinite; }
+      @keyframes ping { 0% { transform: scale(.4); opacity:1; } 100% { transform: scale(2); opacity:0; } }
+
+      .live-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+      .live-label-row { display: flex; align-items: center; gap: 7px; }
       .live-label { color: var(--muted-2); font: 10px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
       .live-value { color: var(--text); font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .spotify-art { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-      .spotify-progress { height: 3px; background: #23232b; border-radius: 3px; margin-top: 6px; overflow: hidden; }
-      .spotify-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg,#1db954,#3ce07e); border-radius: 3px; }
+      .live-sub { color: var(--muted); font: 11px 'DM Mono', monospace; }
+
+      .marquee { overflow: hidden; white-space: nowrap; }
+      .marquee span { display: inline-block; white-space: nowrap; }
+      .marquee.scroll span { animation: marquee 14s linear infinite; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .spotify-art { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; flex-shrink: 0; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+      .spotify-art.playing { animation: artGlow 2.6s ease-in-out infinite; }
+      @keyframes artGlow { 0%,100% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 14px rgba(29,185,84,.25); } 50% { box-shadow: 0 6px 18px rgba(0,0,0,.5), 0 0 30px rgba(29,185,84,.55); } }
+
+      .eq { display: flex; align-items: flex-end; gap: 2px; height: 11px; }
+      .eq span { width: 3px; border-radius: 2px; background: #1db954; animation: eq 1s ease-in-out infinite; }
+      .eq span:nth-child(2) { animation-delay: .18s; }
+      .eq span:nth-child(3) { animation-delay: .36s; }
+      @keyframes eq { 0%,100% { height: 3px; } 50% { height: 11px; } }
+
+      .spotify-progress { height: 4px; background: #23232b; border-radius: 4px; margin-top: 7px; overflow: hidden; position: relative; }
+      .spotify-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg,#1db954,#3ce07e); border-radius: 4px; }
+      .spotify-progress::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: translateX(-100%); }
+      .spotify-progress.playing::after { animation: shimmer 2.2s ease-in-out infinite; }
+      @keyframes shimmer { 0% { transform: translateX(-100%); } 60%,100% { transform: translateX(100%); } }
 
       footer { position: relative; z-index: 1; text-align: center; margin-top: 22px; color: var(--muted-2); font: 11px 'DM Mono', monospace; }
       footer a { color: var(--muted); text-decoration: none; transition: .2s; }
@@ -245,18 +277,23 @@
         </div>
 
         <div class="live-status" aria-label="Canlı durum">
-          <div class="live-row discord">
-            <span class="live-dot" id="discord-dot"></span>
+          <div class="live-card discord">
+            <span class="dot-wrap" id="discord-dot-wrap"><span class="live-dot" id="discord-dot"></span></span>
             <div class="live-text">
               <span class="live-label">Discord</span>
               <span class="live-value" id="discord-status">bağlanıyor…</span>
             </div>
           </div>
-          <div class="live-row spotify">
+          <div class="live-card spotify">
             <img class="spotify-art" id="spotify-art" src="" alt="Albüm kapağı" hidden />
             <div class="live-text">
-              <span class="live-label">Spotify</span>
+              <div class="live-label-row">
+                <span class="live-label">Spotify</span>
+                <span class="eq" id="eq" hidden><span></span><span></span><span></span></span>
+              </div>
               <span class="live-value" id="spotify-status">—</span>
+              <div class="marquee" id="spotify-title" hidden><span id="spotify-title-inner"></span></div>
+              <span class="live-sub" id="spotify-artist" hidden></span>
               <div class="spotify-progress" id="spotify-progress-wrap" hidden><div class="spotify-progress-bar" id="spotify-progress-bar"></div></div>
             </div>
           </div>
@@ -342,7 +379,7 @@
 
       function updateLanyard(data) {
         const status = data.discord_status || 'offline'; // online / idle / dnd / offline
-        const dot = document.getElementById('discord-dot');
+        const dotWrap = document.getElementById('discord-dot-wrap');
         const statusEl = document.getElementById('discord-status');
         const cardDot = document.getElementById('discord-card-dot');
         const cardCopy = document.getElementById('discord-card-copy');
@@ -359,8 +396,8 @@
           offline: ['Çevrimdışı', '#5d5d65']
         };
         const [label, color] = map[status] || map.offline;
-        dot.style.background = color;
-        dot.style.boxShadow = '0 0 10px ' + color;
+        dotWrap.style.setProperty('--dot-color', color);
+        dotWrap.classList.toggle('online', status !== 'offline');
         cardDot.style.background = color;
         cardDot.style.boxShadow = '0 0 10px ' + color;
         cardDot.classList.remove('idle');
@@ -376,21 +413,47 @@
         // Spotify: aktivite tipi 2 = Dinleniyor
         const spot = data.activities && data.activities.find(a => a.type === 2 && a.name === 'Spotify');
         const art = document.getElementById('spotify-art');
+        const eq = document.getElementById('eq');
         const spotStatus = document.getElementById('spotify-status');
+        const titleWrap = document.getElementById('spotify-title');
+        const titleInner = document.getElementById('spotify-title-inner');
+        const artistEl = document.getElementById('spotify-artist');
         const progWrap = document.getElementById('spotify-progress-wrap');
         const progBar = document.getElementById('spotify-progress-bar');
+
         if (spot && spot.assets) {
           art.src = spot.assets.large_image.replace('spotify:', 'https://i.scdn.co/image/');
           art.hidden = false;
-          spotStatus.textContent = spot.details + ' — ' + spot.state;
+          art.classList.add('playing');
+          eq.hidden = false;
+          spotStatus.hidden = true;
+          // Uzun başlıklar için kayan (marquee) animasyon
+          if (spot.details.length > 18) {
+            titleInner.textContent = spot.details + '   ✦   ' + spot.details;
+            titleWrap.classList.add('scroll');
+          } else {
+            titleInner.textContent = spot.details;
+            titleWrap.classList.remove('scroll');
+          }
+          titleWrap.hidden = false;
+          artistEl.textContent = spot.state;
+          artistEl.hidden = false;
           progWrap.hidden = false;
+          progWrap.classList.add('playing');
           const total = (spot.timestamps.end - spot.timestamps.start) / 1000;
           const elapsed = (Date.now() - spot.timestamps.start) / 1000;
           progBar.style.width = Math.min(100, (elapsed / total) * 100) + '%';
         } else {
           art.hidden = true;
-          progWrap.hidden = true;
+          art.classList.remove('playing');
+          eq.hidden = true;
+          spotStatus.hidden = false;
           spotStatus.textContent = 'şu an müzik dinlemiyor';
+          titleWrap.hidden = true;
+          titleWrap.classList.remove('scroll');
+          artistEl.hidden = true;
+          progWrap.hidden = true;
+          progWrap.classList.remove('playing');
         }
       }
 
