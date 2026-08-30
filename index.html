@@ -698,9 +698,12 @@
           ws.onopen = () => ws.send(JSON.stringify({ op: 2, d: { subscribe_to_ids: [DISCORD_ID] } }));
           ws.onmessage = e => {
             let msg; try { msg = JSON.parse(e.data); } catch (err) { return; }
-            if (msg.op === 0) {
+            if (msg.op === 1) { // hello → kalp atışını başlat (bağlantıyı canlı tut)
               hb = setInterval(() => { try { ws.send(JSON.stringify({ op: 1 })); } catch (e) {} }, msg.d.heartbeat_interval);
-            } else if (msg.op === 4) {
+            } else if (msg.op === 0) { // başlangıç durumu (ID ile anahtarlı)
+              const d = msg.d && msg.d[DISCORD_ID];
+              if (d) updateLanyard(d);
+            } else if (msg.op === 4) { // anlık durum güncellemesi
               updateLanyard(msg.d);
             }
           };
