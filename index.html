@@ -166,6 +166,7 @@
         position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px;
         padding: 14px 15px; border-radius: 16px; border: 1px solid var(--border);
         background: rgba(255,255,255,.02); transition: border-color .25s ease, transform .25s ease;
+        text-decoration: none; color: inherit;
       }
       .live-card::before { content:""; position:absolute; inset:0; opacity:0; transition: opacity .35s ease; pointer-events:none; }
       .live-card:hover { transform: translateY(-2px); }
@@ -283,7 +284,7 @@
         </div>
 
         <div class="live-status" aria-label="Canlı durum">
-          <div class="live-card discord">
+          <a class="live-card discord" href="https://discord.com/users/780466364636332062" target="_blank" rel="noreferrer">
             <div class="dc-avatar-wrap">
               <img class="dc-avatar" id="dc-avatar" src="profile.jpg" alt="Discord profil fotoğrafı" />
               <span class="dot-wrap" id="discord-dot-wrap"><span class="live-dot" id="discord-dot"></span></span>
@@ -295,8 +296,8 @@
               </div>
               <span class="live-value" id="discord-status">bağlanıyor…</span>
             </div>
-          </div>
-          <div class="live-card spotify">
+          </a>
+          <a class="live-card spotify" id="spotify-link" href="https://open.spotify.com/user/8x5yr03fshgcl5rtsm2z0fwpk" target="_blank" rel="noreferrer">
             <img class="spotify-art" id="spotify-art" src="" alt="Albüm kapağı" hidden />
             <div class="live-text">
               <div class="live-label-row">
@@ -309,7 +310,7 @@
               <span class="live-sub" id="spotify-artist" hidden></span>
               <div class="spotify-progress" id="spotify-progress-wrap" hidden><div class="spotify-progress-bar" id="spotify-progress-bar"></div></div>
             </div>
-          </div>
+          </a>
         </div>
 
         <nav class="links" aria-label="Sosyal bağlantılar">
@@ -444,6 +445,10 @@
           art.src = spot.assets.large_image.replace('spotify:', 'https://i.scdn.co/image/');
           art.hidden = false;
           art.classList.add('playing');
+          // Kart tıklanınca şarkıyı Spotify'da aç
+          const spotLink = document.getElementById('spotify-link');
+          if (spot.sync_id) spotLink.href = 'https://open.spotify.com/track/' + spot.sync_id;
+          else spotLink.href = 'https://open.spotify.com/user/8x5yr03fshgcl5rtsm2z0fwpk';
           eq.hidden = false;
           spotStatus.hidden = true;
           // Uzun başlıklar için kayan (marquee) animasyon
