@@ -688,7 +688,7 @@
         } catch (e) {}
       }
       pollLanyard();
-      setInterval(pollLanyard, 60000); // yedek: WebSocket koparsa
+      setInterval(pollLanyard, 5000); // 5 saniyede bir güncelle (güvenilir)
 
       // Gerçek zamanlı: Lanyard WebSocket (anlık, bekleme yok)
       function connectLanyardWS() {
