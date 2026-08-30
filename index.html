@@ -584,6 +584,7 @@
       const DISCORD_ID = '780466364636332062';
       let lastSeen = parseInt(localStorage.getItem('lanyard_lastseen') || '0', 10);
       let lastLanyard = null;
+      let lastSpot = null;
 
       function fmtAgo(ts) {
         const s = Math.max(1, Math.round((Date.now() - ts) / 1000));
@@ -663,6 +664,7 @@
           const total = (spot.timestamps.end - spot.timestamps.start) / 1000;
           const elapsed = (Date.now() - spot.timestamps.start) / 1000;
           progBar.style.width = Math.min(100, (elapsed / total) * 100) + '%';
+          lastSpot = spot;
         } else {
           art.hidden = true;
           art.classList.remove('playing');
@@ -674,6 +676,7 @@
           artistEl.hidden = true;
           progWrap.hidden = true;
           progWrap.classList.remove('playing');
+          lastSpot = null;
         }
       }
 
@@ -685,7 +688,37 @@
         } catch (e) {}
       }
       pollLanyard();
-      setInterval(pollLanyard, 30000);
+      setInterval(pollLanyard, 60000); // yedek: WebSocket koparsa
+
+      // Gerçek zamanlı: Lanyard WebSocket (anlık, bekleme yok)
+      function connectLanyardWS() {
+        let ws, hb;
+        function open() {
+          try { ws = new WebSocket('wss://api.lanyard.rest/socket'); } catch (e) { return; }
+          ws.onopen = () => ws.send(JSON.stringify({ op: 2, d: { subscribe_to_ids: [DISCORD_ID] } }));
+          ws.onmessage = e => {
+            let msg; try { msg = JSON.parse(e.data); } catch (err) { return; }
+            if (msg.op === 0) {
+              hb = setInterval(() => { try { ws.send(JSON.stringify({ op: 1 })); } catch (e) {} }, msg.d.heartbeat_interval);
+            } else if (msg.op === 4) {
+              updateLanyard(msg.d);
+            }
+          };
+          ws.onclose = () => { clearInterval(hb); setTimeout(open, 5000); };
+          ws.onerror = () => { try { ws.close(); } catch (e) {} };
+        }
+        open();
+      }
+      connectLanyardWS();
+
+      // Spotify ilerleme çubuğunu her saniye tazele
+      setInterval(() => {
+        if (lastSpot) {
+          const total = (lastSpot.timestamps.end - lastSpot.timestamps.start) / 1000;
+          const elapsed = (Date.now() - lastSpot.timestamps.start) / 1000;
+          document.getElementById('spotify-progress-bar').style.width = Math.min(100, (elapsed / total) * 100) + '%';
+        }
+      }, 1000);
 
       // ===== Canlı saat (Gaziantep) =====
       function updateClock() {
